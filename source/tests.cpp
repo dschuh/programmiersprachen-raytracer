@@ -1,5 +1,9 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
+#include "sphere.hpp"
+#include "box.hpp"
+
+TEST_CASE("sphere","[sphere]"){
 
 int main(int argc, char *argv[])
 {
