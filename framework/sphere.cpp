@@ -4,7 +4,7 @@
 		center{},
 		radius{0}{}
 
-	Sphere::Sphere(glm::vec3 ctr, float r):
+	Sphere::Sphere(glm::vec3 const& ctr, float r):
 		center{ctr},
 		radius{r}{}
 
@@ -16,10 +16,10 @@
 		return this -> radius;
 	}
 
-	float Sphere::area() const override{
+	float Sphere::area() const {
 		return (4* M_PI * this -> radius * this -> radius);
 	}
 		
-	float Sphere::volume() const override{
+	float Sphere::volume() const {
 		return ((4/3)* M_PI * this -> radius * this -> radius * this -> radius);
 	}

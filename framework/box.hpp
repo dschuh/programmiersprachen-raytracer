@@ -3,8 +3,9 @@
 
 #include <glm/vec3.hpp>
 #include <math.h>
+#include "shape.hpp"
 
-class Box : public Shape{
+class Box : public Shape {
 
   private:
 	glm::vec3 minimum;

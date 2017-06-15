@@ -3,6 +3,7 @@
 
 #include <glm/vec3.hpp>
 #include <math.h>
+#include "shape.hpp"
 
 class Sphere : public Shape{
 
