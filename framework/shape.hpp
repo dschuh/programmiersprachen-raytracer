@@ -20,8 +20,8 @@ public:
 	Color const& get_color() const;
 	String const& get_name() const;
 
-	virtual float area() const;
-	virtual float volume() const;
+	virtual float area() const =0;
+	virtual float volume() const =0;
 
 	virtual std::ostream& print(std::ostream& os) const;
 
