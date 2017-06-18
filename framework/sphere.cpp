@@ -1,11 +1,13 @@
 #include "sphere.hpp"
 
-	Sphere::Sphere():
+	Sphere::Sphere(std::string const& nm):
+        Shape{nm, Color{}},
 		center{},
 		radius{0}{}
 
-	Sphere::Sphere(glm::vec3 const& ctr, float r):
-		center{ctr},
+	Sphere::Sphere(std::string const& nm, Color const& clr, glm::vec3 const& ctr, float r):
+        Shape{nm, clr},		
+        center{ctr},
 		radius{r}{}
 
 	glm::vec3 Sphere::getCenter() const{
@@ -21,5 +23,5 @@
 	}
 		
 	float Sphere::volume() const {
-		return ((4/3)* M_PI * this -> radius * this -> radius * this -> radius);
+		return ((4.0f/3.0f)* M_PI * this -> radius * this -> radius * this -> radius);
 	}

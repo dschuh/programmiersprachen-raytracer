@@ -12,8 +12,8 @@ class Sphere : public Shape{
 	float radius;
 
   public:
-	Sphere(); //Default Constructor
-	Sphere(glm::vec3 const& ctr, float r); //Custom Constructor
+	Sphere(std::string const& nm); //Default Constructor
+	Sphere(std::string const& nm, Color const& clr, glm::vec3 const& ctr, float r); //Custom Constructor
 
 	//Getter
 	glm::vec3 getCenter() const;

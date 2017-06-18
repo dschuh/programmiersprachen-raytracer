@@ -1,8 +1,19 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
+#include "color.hpp"
+
 class Shape{
+  protected:
+    std::string const& name_;
+    Color const& color_;
+
   public:
+    Shape(std::string const& nm, Color const& clr);
+
+    std::string getName() const;
+    Color getColor() const;
+
 	virtual float area() const = 0;
 	virtual float volume() const = 0;
 };

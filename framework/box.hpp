@@ -12,8 +12,8 @@ class Box : public Shape {
 	glm::vec3 maximum;
 
   public:
-	Box(); //Default Constructor
-	Box(glm::vec3 const& min, glm::vec3 const& max); //Custom Constructor	
+	Box(std::string const& nm); //Default Constructor
+	Box(std::string const& nm, Color const& clr, glm::vec3 const& min, glm::vec3 const& max); //Custom Constructor	
 
 	//Getter
 	glm::vec3 getMinimum() const;

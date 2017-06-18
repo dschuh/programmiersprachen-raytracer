@@ -1,10 +1,12 @@
 #include "box.hpp"
 
-Box::Box():
+Box::Box(std::string const& nm):
+    Shape{nm, Color{}},
 	minimum{},
 	maximum{}{}
 
-Box::Box(glm::vec3 const& min, glm::vec3 const& max):
+Box::Box(std::string const& nm, Color const& clr,glm::vec3 const& min, glm::vec3 const& max):
+    Shape{nm, clr},
 	minimum{min},
 	maximum{max}{}	
 
