@@ -5,9 +5,11 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
 #include "shape.hpp"
-#include "ray.hpp"
+//#include "ray.hpp"
 
 class Sphere : public Shape{
+
+private:
 
 	glm::vec3 center_;
 	float radius_;
@@ -15,11 +17,15 @@ class Sphere : public Shape{
 public:
 
 	Sphere();
-	Sphere(glm::vec3 const& center, float r, Color const& clr, String const& name);
+	Sphere(glm::vec3 const& center, float r);
+	Sphere(glm::vec3 const& center, float r, Color const& clr, string const& name);
 
 	glm::vec3 const& get_center() const;
-	float get_radius() const;
+	float const& get_radius() const;
 
 	float area() const override;
 	float volume() const override;
 };
+
+
+#endif

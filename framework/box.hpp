@@ -6,13 +6,15 @@
 
 class Box : public Shape{
 
+private:
+
 	glm::vec3 min_;
 	glm::vec3 max_; 
 
 public:
 
 	Box();
-	Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color, String const& name);
+	Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color, string const& name);
 
 	glm::vec3 const& get_min() const;
 	glm::vec3 const& get_max() const;
@@ -20,7 +22,7 @@ public:
 	float area() const override;
 	float volume() const override;
 
-	std::ostream& print(std::ostream& os) const override;
+	//std::ostream& print(std::ostream& os) const override;
 	
 };
 

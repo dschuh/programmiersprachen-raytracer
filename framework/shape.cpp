@@ -1,24 +1,24 @@
 #include "shape.hpp"
 
 Shape::Shape():
-    color_{Color{0.0f, 0.0f, 0.0f}},
-    name_{"Shape"}
+    name_{"Shape"},
+	color_{Color{0.0f, 0.0f, 0.0f}}
     {}
 
-Shape::Shape(String const& name):
-	color_{Color{0.0f, 0.0f, 0.0f}},
-	name_{name}
+Shape::Shape(string const& name):
+	name_{name},
+	color_{Color{0.0f, 0.0f, 0.0f}}
 	{}
 
-Shape::Shape(Color const& color, String const& name):
-	color_{color},
-	name_{name}
+Shape::Shape(string const& name, Color const& color):
+	name_{name},
+	color_{color}
 	{}
 
 Color const& Shape::get_color() const{
     return color_;
 }
 
-String const& Shape::get_name() const{
+string const& Shape::get_name() const{
     return name_;
 }
