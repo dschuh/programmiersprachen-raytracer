@@ -30,7 +30,7 @@ std::ostream& Shape::print(std::ostream& ostream) const
 	return ostream;
 }
 
-std::ostream& operator <<(std::ostream& os, Shape const& s)
+std::ostream& operator <<(std::ostream& ostream, Shape const& s)
 {
-	return s.print(os);
+	return s.print(ostream);
 }

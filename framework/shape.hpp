@@ -27,6 +27,6 @@ public:
 
 };
 
-ostream& operator <<(ostream& os, Shape const& shape);
+ostream& operator <<(ostream& ostream, Shape const& shape);
 
 #endif

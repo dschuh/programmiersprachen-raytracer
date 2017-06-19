@@ -35,7 +35,7 @@ float Box::volume() const{
 }
 
 std::ostream& Box::print(std::ostream& ostream) const{
-	Shape::print(os);
+	Shape::print(ostream);
 	ostream << "Min: " << "["<< min_.x << ","<< min_.y << ","<< min_.z << "]" << "\n"
 		    << "Max: " << "["<< max_.x << ","<< max_.y << ","<< max_.z << "]" << "\n";
 }

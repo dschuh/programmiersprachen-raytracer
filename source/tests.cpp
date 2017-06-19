@@ -94,6 +94,14 @@ REQUIRE(sphere2.get_color().g==2.0f);
 REQUIRE(sphere2.get_color().b==3.0f);
 }
 
+TEST_CASE("Creating Boxes and Spheres and printing their values", "[print]"){
+  Box box0{};
+  box0.print(std::cout << "box0 : \n");
+
+  Sphere sphere0{};
+  sphere0.print(std::cout << "sphere0 : \n");
+}
+
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);
