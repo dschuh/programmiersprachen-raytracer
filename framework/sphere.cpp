@@ -40,3 +40,10 @@ std::ostream& Sphere::print(std::ostream& ostream) const{
 	ostream << "Center: " << "["<< center_.x << ","<< center_.y << ","<< center_.z << "]" << "\n"
 	        << "Radius: " << radius_ <<"\n"<<"\n";
 }
+
+bool Sphere::intersect(Ray ray, float distance){
+		ray.direction = glm::normalize(ray.direction);
+		auto result = glm::intersectRaySphere(ray.origin, ray.direction,
+							center_, pow(radius_, 2), distance);
+		return result;
+}

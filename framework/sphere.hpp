@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
 #include "shape.hpp"
-//#include "ray.hpp"
+#include "ray.hpp"
 
 class Sphere : public Shape{
 
@@ -27,6 +27,8 @@ public:
 	float volume() const override;
 
 	std::ostream& print(std::ostream& ostream) const override;
+
+	bool intersect(Ray ray, float distance);
 
 };
 

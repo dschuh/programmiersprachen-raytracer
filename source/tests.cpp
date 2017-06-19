@@ -4,6 +4,7 @@
 #include "shape.cpp"
 #include "sphere.cpp"
 #include "box.cpp"
+#include "ray.cpp"
 
 TEST_CASE("testing box", "[box]"){
 
@@ -100,6 +101,34 @@ TEST_CASE("Creating Boxes and Spheres and printing their values", "[print]"){
 
   Sphere sphere0{};
   sphere0.print(std::cout << "sphere0 : \n");
+}
+
+TEST_CASE("Testing intestectSphere function", "[intersect]"){
+  //Ray
+	glm::vec3 ray_origin{0.0,0.0,0.0};
+	//ray direction has to be normalized!
+	//you can use:
+	//	v = glm::normalize(some_vector)
+	glm::vec3 ray_direction{0.0,0.0,1.0};
+
+	//Sphere
+	glm::vec3 sphere_center{0.0,0.0,5.0};
+	float sphere_radius{1.0};
+
+	float distance{0.0};
+	auto result = glm::intersectRaySphere(
+			ray_origin, ray_direction,
+			sphere_center,
+			sphere_radius * sphere_radius, //squared radius!!
+			distance);
+	REQUIRE(distance == Approx(4.0f));  
+
+  //custom testing
+  Ray ray{{0.0f, 0.0f, -2.0f}, {0.0f, 0.0f, 2.5f}};
+  float custom_distance{0.0};
+  Sphere sphere{{0.0f, 0.0f, 4.0f}, 1.0f, Color{1.0f, 2.0f, 3.0f}, "Sphere"};
+
+  REQUIRE(sphere.intersect(ray, custom_distance) == true);
 }
 
 int main(int argc, char *argv[])
