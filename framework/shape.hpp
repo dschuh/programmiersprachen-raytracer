@@ -8,12 +8,10 @@ using namespace std;
 class Shape{
 
 private:
-
 	Color color_;
 	string name_;	
 
 public:
-
 	Shape();
 	Shape(string const& name);
 	Shape(string const& name, Color const& color);
