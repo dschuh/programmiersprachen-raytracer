@@ -7,7 +7,7 @@
 
 class Box : public Shape {
 
-  private:
+  protected:
 	glm::vec3 minimum;
 	glm::vec3 maximum;
 
@@ -15,12 +15,16 @@ class Box : public Shape {
 	Box(std::string const& nm); //Default Constructor
 	Box(std::string const& nm, Color const& clr, glm::vec3 const& min, glm::vec3 const& max); //Custom Constructor	
 
+    ~Box();
+
 	//Getter
 	glm::vec3 getMinimum() const;
 	glm::vec3 getMaximum() const;
 
 	float area() const override;
 	float volume() const override;
+
+    std::ostream& print(std::ostream& os) const override;
 
 };
 

@@ -11,6 +11,8 @@ class Shape{
   public:
     Shape(std::string const& nm, Color const& clr);
 
+    ~Shape();
+
     std::string getName() const;
     Color getColor() const;
 
