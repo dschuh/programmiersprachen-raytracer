@@ -23,10 +23,10 @@ public:
 	virtual float area() const =0;
 	virtual float volume() const =0;
 
-	virtual std::ostream& print(std::ostream& os) const;
+	virtual ostream& print(ostream& os) const;
 
 };
 
-std::ostream& operator <<(std::ostream& os, Shape const& shape);
+ostream& operator <<(ostream& os, Shape const& shape);
 
 #endif

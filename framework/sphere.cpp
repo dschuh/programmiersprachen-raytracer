@@ -34,3 +34,9 @@ float Sphere::area() const {
 float Sphere::volume() const {
 	return abs((4.0f/3.0f)* M_PI * pow(radius_, 3));
 }
+
+std::ostream& Sphere::print(std::ostream& ostream) const{
+	Shape::print(os);
+	ostream << "Center: " << "["<< center_.x << ","<< center_.y << ","<< center_.z << "]" << "\n"
+	        << "Radius: " << radius_ <<"\n"<<"\n";
+}
