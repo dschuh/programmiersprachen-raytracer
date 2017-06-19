@@ -22,3 +22,15 @@ Color const& Shape::get_color() const{
 string const& Shape::get_name() const{
     return name_;
 }
+
+std::ostream& Shape::print(std::ostream& ostream) const
+{
+	ostream << "Name: "<< name_ << "\n"
+			<< "Color: " << color_ 	;
+	return ostream;
+}
+
+std::ostream& operator <<(std::ostream& os, Shape const& s)
+{
+	return s.print(os);
+}

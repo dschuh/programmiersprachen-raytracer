@@ -7,6 +7,7 @@ using namespace std;
 
 class Shape{
 
+//-----Aufgabe 3---------------//
 private:
 	Color color_;
 	string name_;	
@@ -22,7 +23,7 @@ public:
 	virtual float area() const =0;
 	virtual float volume() const =0;
 
-	//virtual std::ostream& print(std::ostream& os) const;
+	virtual std::ostream& print(std::ostream& os) const;
 
 };
 
