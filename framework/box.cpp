@@ -1,38 +1,42 @@
 #include "box.hpp"
 
-Box::Box(std::string const& nm):
-    Shape{nm, Color{0.0f, 0.0f, 0.0f}},
+Box::Box(std::string const& nmBox):
+    Shape{nmBox, Material{}},
 	minimum{},
-	maximum{}{}
+	maximum{}{
+    std::cout << "box\n";
+    }
 
-Box::Box(std::string const& nm, Color const& clr,glm::vec3 const& min, glm::vec3 const& max):
-    Shape{nm, clr},
+Box::Box(std::string const& nmBox, Material const& matr, glm::vec3 const& min, glm::vec3 const& max):
+    Shape{nmBox, matr},
 	minimum{min},
-	maximum{max}{}	
+	maximum{max}{
+    std::cout << "box\n";
+    }	
 
 Box::~Box(){
-    std::cout << "~box";
+    std::cout << "~box\n";
 }
 
-glm::vec3 Box::getMinimum() const{
-	return this -> minimum;
+glm::vec3 const& Box::getMinimum() const{
+	return minimum;
 }
 
-glm::vec3 Box::getMaximum() const{
-	return this -> maximum;
+glm::vec3 const& Box::getMaximum() const{
+	return maximum;
 }
 
 float Box::area() const {
-	float a = this -> maximum.x - this -> minimum.x;
-	float b = this -> maximum.y - this -> minimum.y;
-	float c = this -> maximum.z - this -> minimum.z;	
+	float a = maximum.x - minimum.x;
+	float b = maximum.y - minimum.y;
+	float c = maximum.z - minimum.z;	
 	return (2*a*b+2*a*c+2*b*c); 
 }
 
 float Box::volume() const {
-	float a = this -> maximum.x - this -> minimum.x;
-	float b = this -> maximum.y - this -> minimum.y;
-	float c = this -> maximum.z - this -> minimum.z;	
+	float a = maximum.x - minimum.x;
+	float b = maximum.y - minimum.y;
+	float c = maximum.z - minimum.z;	
 	return (a*b*c);
 }
 

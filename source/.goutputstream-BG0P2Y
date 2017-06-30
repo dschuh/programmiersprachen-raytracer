@@ -7,14 +7,14 @@ TEST_CASE("sphere","[sphere]"){
 
   
 	Sphere def{"Default"};
-	Sphere cust{"Custom", Material{}, glm::vec3(2.0f,4.0f, 3.0f),4.0f};
-    REQUIRE("Default" == "Default");
+	Sphere cust{"Custom", Color(1.0f, 0.0f, 0.0f), glm::vec3(2.0f,4.0f, 3.0f),4.0f};
     //REQUIRE(def.getName() == "Default");
-    std::cout <<"def.getName() output: " << def.getName();
-    REQUIRE(def.getCenter().x == Approx(0.0f));
+    REQUIRE(def.getCenter().x == 0.0f);
 	REQUIRE(def.getCenter().y == 0.0f);
 	REQUIRE(def.getCenter().z == 0.0f);
-    //Get Material-Tests einfügen
+    REQUIRE(cust.getColor().r == 0.0f);
+    REQUIRE(cust.getColor().g == 0.0f);
+    REQUIRE(cust.getColor().b == 0.0f);
 	REQUIRE(cust.getRadius() == 4.0f);
 	REQUIRE(cust.area() == 201.06194f);
 	REQUIRE(cust.volume() == 268.08258f);
@@ -22,7 +22,7 @@ TEST_CASE("sphere","[sphere]"){
 
 TEST_CASE("box","[box]"){
 	Box def{"Default"};
-	Box cust{"Custom", Material{}, glm::vec3(2.0f,4.0f, 3.0f),glm::vec3(10.0f,25.0f, 40.0f)};
+	Box cust{"Custom", Color(0.0f, 0.0f, 0.0f), glm::vec3(2.0f,4.0f, 3.0f),glm::vec3(10.0f,25.0f, 40.0f)};
     /*REQUIRE(def.getName() == "Default");	
     REQUIRE(def.getMinimum().x == 0.0f);
 	REQUIRE(def.getMinimum().y == 0.0f);
@@ -30,17 +30,19 @@ TEST_CASE("box","[box]"){
     REQUIRE(cust.getMaximum().x == 10.0f);
     REQUIRE(cust.getMaximum().y == 25.0f);
     REQUIRE(cust.getMaximum().z == 40.0f);*/
-    //Get Material Tests einfügen
+    REQUIRE(cust.getColor().r == 0.0f);
+    REQUIRE(cust.getColor().g == 0.0f);
+    REQUIRE(cust.getColor().b == 0.0f);
 	//REQUIRE(cust.area() == 2482.0f);
 	//REQUIRE(cust.volume() == 6216.0f);
 }
 
-/*TEST_CASE("print","[print]"){
+TEST_CASE("print","[print]"){
     Box defBox{"DefaultBox"};
     Sphere defSphere{"DefaultSphere"};
     std::cout<<defBox << defSphere;
     std::cout<<defBox.getName();
-}*/
+}
 
 TEST_CASE("intersectRaySphere", "[intersect]"){
     glm::vec3 ray_origin{0.0, 0.0, 0.0};
@@ -56,21 +58,14 @@ TEST_CASE("intersectRaySphere", "[intersect]"){
         sphere_radius * sphere_radius,
         distance);
     REQUIRE(distance == Approx(4.0f));
-
-    Sphere s {"some_sphere", Material{}, sphere_center, sphere_radius};
-
-	Ray r {ray_origin,ray_direction};
-
-	s.intersect(r,distance);
-
-REQUIRE(distance == Approx(4.0f));
 }
 
 TEST_CASE("destructors","[destructors]"){
+    Color red(255.0f, 0.0f, 0.0f);
     glm::vec3 position(0.0f, 0.0f, 0.0f);
 
-    Sphere* s1 = new Sphere("sphere0", Material{}, position, 1.2f);
-    Shape* s2 = new Sphere("sphere1", Material{}, position, 1.2f);
+    Sphere* s1 = new Sphere("sphere0", red, position, 1.2f);
+    Shape* s2 = new Sphere("sphere1", red, position, 1.2f);
 
     std::cout << s1 << s2;
 

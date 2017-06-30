@@ -1,40 +1,44 @@
 #include "sphere.hpp"
 
-	Sphere::Sphere(std::string const& nm):
-        Shape{nm, Color{0.0f, 0.0f, 0.0f}},
-		center{},
-		radius{0}{}
+	Sphere::Sphere(std::string const& nmSphere):
+        Shape{nmSphere, Material{}},
+		center{glm::vec3{0.0f}},
+		radius{0}{
+        std::cout << "sphere \n";
+        }
 
-	Sphere::Sphere(std::string const& nm, Color const& clr, glm::vec3 const& ctr, float r):
-        Shape{nm, clr},		
+	Sphere::Sphere(std::string const& nmSphere, Material const& matr, glm::vec3 const& ctr, float r):
+        Shape{nmSphere, matr},		
         center{ctr},
-		radius{r}{}
+		radius{r}{
+        std::cout << "sphere\n";
+        }
 
     Sphere::~Sphere(){
-        std::cout << "~sphere";
+        std::cout << "~sphere\n";
     }
 
-	glm::vec3 Sphere::getCenter() const{
-		return this -> center;
+	glm::vec3 const& Sphere::getCenter() const{
+		return center;
 	}
 
 	float Sphere::getRadius() const{
-		return this -> radius;
+		return radius;
 	}
 
 	float Sphere::area() const {
-		return (4* M_PI * this -> radius * this -> radius);
+		return (4* M_PI * radius * radius);
 	}
 		
 	float Sphere::volume() const {
-		return ((4.0f/3.0f)* M_PI * this -> radius * this -> radius * this -> radius);
+		return ((4.0f/3.0f)* M_PI * radius * radius * radius);
 	}
 
     std::ostream& Sphere::print(std::ostream& os) const{
-    Shape::print(os);
-    os << "Center:" << "(" << center.x << "," << center.y << "," << center.z << ")" << "\n";
-    os << "Radius:" << radius << "\n";
-    return os;
+        Shape::print(os);
+        os << "Center:" << "(" << center.x << "," << center.y << "," << center.z << ")" << "\n";
+        os << "Radius:" << radius << "\n";
+        return os;
     }
 
     bool Sphere::intersect(Ray const& ray, float& distance){

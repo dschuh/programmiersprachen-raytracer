@@ -1,25 +1,26 @@
 #include "shape.hpp"
 
-Shape::Shape(std::string const& nm, Color const& clr):
+Shape::Shape(std::string const& nm, Material const& matr):
     name_{nm},
-    color_{clr}{}
+    material_{matr}{
+    std::cout << "shape\n";}
 
 Shape::~Shape(){
-    std::cout << "~shape";
+    std::cout << "~shape\n";
 }
 
-std::string Shape::getName() const{
-    return this->name_;
+std::string const& Shape::getName() const{
+    return name_;
 }
 
 
-Color Shape::getColor() const{
-    return this-> color_;
+Material const& Shape::getMaterial() const{
+    return material_;
 }    
 
 std::ostream& Shape::print(std::ostream& os) const{
     os << "Name:" << name_ << "\n";
-    os << "Color:" << "(" << color_.r <<"," << color_.g << "," << color_.b << ")" << "\n";
+    os << "Material: \n" << material_;
     return os;
 }
 

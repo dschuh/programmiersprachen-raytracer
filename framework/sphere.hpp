@@ -11,17 +11,17 @@
 class Sphere : public Shape{
 
   protected:
-	glm::vec3 center;
+	glm::vec3 const& center;
 	float radius;
 
   public:
-	Sphere(std::string const& nm); //Default Constructor
-	Sphere(std::string const& nm, Color const& clr, glm::vec3 const& ctr, float r); //Custom Constructor
+	Sphere(std::string const& nmSphere); //Default Constructor
+	Sphere(std::string const& nmSphere, Material const& matr, glm::vec3 const& ctr, float r); //Custom Constructor
 
     ~Sphere();
 
 	//Getter
-	glm::vec3 getCenter() const;
+	glm::vec3 const& getCenter() const;
 	float getRadius() const;
 
 	float area() const override;
