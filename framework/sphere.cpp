@@ -1,15 +1,15 @@
 #include "sphere.hpp"
 
 	Sphere::Sphere(std::string const& nmSphere):
-        Shape{nmSphere, Material{}},
-		center{glm::vec3{0.0f}},
-		radius{0}{
-        std::cout << "sphere \n";
+        	Shape{nmSphere, Material{}},
+		center{glm::vec3{}},
+		radius{0.0f}{
+        	std::cout << "sphere \n";
         }
 
 	Sphere::Sphere(std::string const& nmSphere, Material const& matr, glm::vec3 const& ctr, float r):
-        Shape{nmSphere, matr},		
-        center{ctr},
+        	Shape{nmSphere, matr},		
+        	center{ctr},
 		radius{r}{
         std::cout << "sphere\n";
         }
@@ -36,8 +36,7 @@
 
     std::ostream& Sphere::print(std::ostream& os) const{
         Shape::print(os);
-        os << "Center:" << "(" << center.x << "," << center.y << "," << center.z << ")" << "\n";
-        os << "Radius:" << radius << "\n";
+        os << "Center:" << "(" << center.x << "," << center.y << "," << center.z << ")" << "\n" << "Radius:" << radius << "\n";
         return os;
     }
 
