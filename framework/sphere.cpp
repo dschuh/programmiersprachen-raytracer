@@ -18,16 +18,23 @@ Sphere::Sphere(glm::vec3 const& center, float r, Color const& color, string cons
     center_{center},
     radius_{r}
     {}    
+<<<<<<< HEAD
 
 Sphere::~Sphere(){
     std::cout << "Sphere-Destruktor wird auf " << get_name() << " aufgerufen \n";
 }
+=======
+>>>>>>> b0a8e5889e5176a1bbd8c6e1b5a2f1f04dad6ca8
     
 glm::vec3 const& Sphere::get_center() const{
     return center_;
 }
 
+<<<<<<< HEAD
 float Sphere::get_radius() const{
+=======
+float const& Sphere::get_radius() const{
+>>>>>>> b0a8e5889e5176a1bbd8c6e1b5a2f1f04dad6ca8
     return radius_;
 }
 

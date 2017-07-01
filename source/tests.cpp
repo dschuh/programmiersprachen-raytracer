@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "sphere.hpp"
 #include "box.hpp"
 
@@ -77,6 +78,8 @@ TEST_CASE("destructors","[destructors]"){
 }
 
 =======
+=======
+>>>>>>> b0a8e5889e5176a1bbd8c6e1b5a2f1f04dad6ca8
 #include <glm/vec3.hpp>
 #include "shape.cpp"
 #include "sphere.cpp"
@@ -207,6 +210,9 @@ TEST_CASE("Testing intestectSphere function", "[intersect]"){
 
   REQUIRE(sphere.intersect(ray, custom_distance) == true);
 }
+<<<<<<< HEAD
+>>>>>>> b0a8e5889e5176a1bbd8c6e1b5a2f1f04dad6ca8
+=======
 >>>>>>> b0a8e5889e5176a1bbd8c6e1b5a2f1f04dad6ca8
 
 int main(int argc, char *argv[])
