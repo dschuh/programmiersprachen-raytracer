@@ -9,12 +9,12 @@ Shape::~Shape(){
     std::cout << "~shape\n";
 }
 
-std::string const& Shape::getName() const{
+std::string Shape::getName() const{
     return name_;
 }
 
 
-Material const& Shape::getMaterial() const{
+Material Shape::getMaterial() const{
     return material_;
 }    
 

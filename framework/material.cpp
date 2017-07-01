@@ -17,7 +17,7 @@ Material::Material(std::string const& nm, Color const& ka, Color const& kd, Colo
 
 std::ostream& operator<<(std::ostream& os, Material const& m){
     os << "Name:" << m.name << "\n ka:" << m.ka << "\n kd:" << m.kd << "\n ks:" << m.ks
-       << "\n m:" << m.m;
+       << "\n m:" << m.m << "\n";
 
     return os;
 

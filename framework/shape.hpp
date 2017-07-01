@@ -5,16 +5,16 @@
 
 class Shape{
   protected:
-    std::string const& name_;
-    Material const& material_;
+    std::string name_;
+    Material material_;
 
   public:
     Shape(std::string const& nm, Material const& matr);
 
     ~Shape();
 
-    std::string const& getName() const;
-    Material const& getMaterial() const;
+    std::string getName() const;
+    Material getMaterial() const;
 
 	virtual float area() const = 0;
 	virtual float volume() const = 0;

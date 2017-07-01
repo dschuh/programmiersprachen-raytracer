@@ -11,7 +11,7 @@
 class Sphere : public Shape{
 
   protected:
-	glm::vec3 const& center;
+	glm::vec3 center;
 	float radius;
 
   public:
@@ -21,7 +21,7 @@ class Sphere : public Shape{
     ~Sphere();
 
 	//Getter
-	glm::vec3 const& getCenter() const;
+	glm::vec3 getCenter() const;
 	float getRadius() const;
 
 	float area() const override;

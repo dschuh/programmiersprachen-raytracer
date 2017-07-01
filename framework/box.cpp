@@ -18,11 +18,11 @@ Box::~Box(){
     std::cout << "~box\n";
 }
 
-glm::vec3 const& Box::getMinimum() const{
+glm::vec3 Box::getMinimum() const{
 	return minimum;
 }
 
-glm::vec3 const& Box::getMaximum() const{
+glm::vec3 Box::getMaximum() const{
 	return maximum;
 }
 

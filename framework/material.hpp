@@ -2,13 +2,14 @@
 #define MATERIAL_HPP
 
 #include "color.hpp"
+#include <string>
 
 struct Material{
 
-    std::string const& name;
-    Color const& ka;
-    Color const& kd;
-    Color const& ks;
+    std::string name;
+    Color ka;
+    Color kd;
+    Color ks;
     float m;
 
     Material();

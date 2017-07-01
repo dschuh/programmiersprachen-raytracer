@@ -18,7 +18,7 @@
         std::cout << "~sphere\n";
     }
 
-	glm::vec3 const& Sphere::getCenter() const{
+	glm::vec3 Sphere::getCenter() const{
 		return center;
 	}
 
