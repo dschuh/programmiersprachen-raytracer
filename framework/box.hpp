@@ -2,30 +2,28 @@
 #define BOX_HPP
 
 #include <glm/vec3.hpp>
-#include <math.h>
 #include "shape.hpp"
 
-class Box : public Shape {
+class Box : public Shape{
 
-  protected:
-	glm::vec3 minimum;
-	glm::vec3 maximum;
+private:
 
-  public:
-	Box(std::string const& nmBox); //Default Constructor
-	Box(std::string const& nmBox, Material const& matr, glm::vec3 const& min, glm::vec3 const& max); //Custom Constructor	
+	glm::vec3 min_;
+	glm::vec3 max_; 
 
-    ~Box();
+public:
 
-	//Getter
-	glm::vec3 getMinimum() const;
-	glm::vec3 getMaximum() const;
+	Box();
+	Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color, string const& name);
+
+	glm::vec3 const& get_min() const;
+	glm::vec3 const& get_max() const;
 
 	float area() const override;
 	float volume() const override;
 
-    std::ostream& print(std::ostream& os) const override;
-
+	std::ostream& print(std::ostream& ostream) const override;
+	
 };
 
 #endif

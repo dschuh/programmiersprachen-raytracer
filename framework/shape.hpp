@@ -1,27 +1,36 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include "material.hpp"
+#include "color.hpp"
+#include "ray.hpp"
+
+using namespace std;
 
 class Shape{
-  protected:
-    std::string name_;
-    Material material_;
 
-  public:
-    Shape(std::string const& nm, Material const& matr);
+private:
+	Color color_;
+	string name_;	
 
-    ~Shape();
+public:
+	Shape();
+	Shape(string const& name);
+	Shape(string const& name, Color const& color);
 
-    std::string getName() const;
-    Material getMaterial() const;
+	~Shape();
 
-	virtual float area() const = 0;
-	virtual float volume() const = 0;
+	Color const& get_color() const;
+	string const& get_name() const;
 
-    virtual std::ostream& print(std::ostream& os) const;
+	virtual float area() const =0;
+	virtual float volume() const =0;
+
+	virtual ostream& print(ostream& os) const;
+
+	virtual bool intersect (Ray const& ray, float& t)=0;
+
 };
 
-std::ostream& operator<<(std::ostream& os, Shape const& s);
+ostream& operator <<(ostream& ostream, Shape const& shape);
 
 #endif

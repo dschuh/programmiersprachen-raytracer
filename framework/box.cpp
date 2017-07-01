@@ -1,48 +1,41 @@
 #include "box.hpp"
+#include <glm/vec3.hpp>
+#include <cmath>
 
-Box::Box(std::string const& nmBox):
-    Shape{nmBox, Material{}},
-	minimum{},
-	maximum{}{
-    std::cout << "box\n";
-    }
+Box::Box():
+    Shape{"Box"},
+    min_{glm::vec3{0.0f}},
+    max_{glm::vec3{1.0f}}
+    {}
 
-Box::Box(std::string const& nmBox, Material const& matr, glm::vec3 const& min, glm::vec3 const& max):
-    Shape{nmBox, matr},
-	minimum{min},
-	maximum{max}{
-    std::cout << "box\n";
-    }	
+Box::Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color, string const& name):
+    Shape{name, color},
+    min_{glm::vec3{min}},
+    max_{glm::vec3{max}}
+    {}
 
-Box::~Box(){
-    std::cout << "~box\n";
+glm::vec3 const& Box::get_min() const
+{
+	return min_;
 }
 
-glm::vec3 Box::getMinimum() const{
-	return minimum;
-}
-
-glm::vec3 Box::getMaximum() const{
-	return maximum;
+glm::vec3 const& Box::get_max() const
+{
+	return max_;
 }
 
 float Box::area() const {
-	float a = maximum.x - minimum.x;
-	float b = maximum.y - minimum.y;
-	float c = maximum.z - minimum.z;	
-	return (2*a*b+2*a*c+2*b*c); 
+	return  abs((2 * (max_.x - min_.x) * (max_.y - min_.y)) +
+			(2 * (max_.x - min_.x) * (max_.z - min_.z)) +
+			(2 * (max_.y - min_.y) * (max_.z - min_.z)));
 }
 
-float Box::volume() const {
-	float a = maximum.x - minimum.x;
-	float b = maximum.y - minimum.y;
-	float c = maximum.z - minimum.z;	
-	return (a*b*c);
+float Box::volume() const{
+	return  abs((max_.x - min_.x) * (max_.y - min_.y) *	(max_.z - min_.z));
 }
 
-std::ostream& Box::print(std::ostream& os) const{
-    Shape::print(os);
-    os << "Minimum:" << "(" << minimum.x << "," << minimum.y << "," << minimum.z << ")" << "\n";
-    os << "Maximum:" << "(" << maximum.x << "," << maximum.y << "," << maximum.z << ")" << "\n";
-    return os;
+std::ostream& Box::print(std::ostream& ostream) const{
+	Shape::print(ostream);
+	ostream << "Min: " << "["<< min_.x << ","<< min_.y << ","<< min_.z << "]" << "\n"
+		    << "Max: " << "["<< max_.x << ","<< max_.y << ","<< max_.z << "]" << "\n";
 }

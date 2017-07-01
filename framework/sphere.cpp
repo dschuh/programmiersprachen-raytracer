@@ -1,51 +1,53 @@
 #include "sphere.hpp"
+#include <cmath>
 
-	Sphere::Sphere(std::string const& nmSphere):
-        	Shape{nmSphere, Material{}},
-		center{glm::vec3{}},
-		radius{0.0f}{
-        	std::cout << "sphere \n";
-        }
+Sphere::Sphere():
+    Shape{"Sphere"},
+    center_{glm::vec3{0.0f}},
+    radius_{1.0f}
+    {}
 
-	Sphere::Sphere(std::string const& nmSphere, Material const& matr, glm::vec3 const& ctr, float r):
-        	Shape{nmSphere, matr},		
-        	center{ctr},
-		radius{r}{
-        std::cout << "sphere\n";
-        }
+Sphere::Sphere(glm::vec3 const& center, float r):
+    Shape{"Sphere"},
+    center_{center},
+    radius_{r}
+    {}
 
-    Sphere::~Sphere(){
-        std::cout << "~sphere\n";
-    }
+Sphere::Sphere(glm::vec3 const& center, float r, Color const& color, string const& name):
+    Shape{name, color},
+    center_{center},
+    radius_{r}
+    {}    
 
-	glm::vec3 Sphere::getCenter() const{
-		return center;
-	}
+Sphere::~Sphere(){
+    std::cout << "Sphere-Destruktor wird auf " << get_name() << " aufgerufen \n";
+}
+    
+glm::vec3 const& Sphere::get_center() const{
+    return center_;
+}
 
-	float Sphere::getRadius() const{
-		return radius;
-	}
+float Sphere::get_radius() const{
+    return radius_;
+}
 
-	float Sphere::area() const {
-		return (4* M_PI * radius * radius);
-	}
-		
-	float Sphere::volume() const {
-		return ((4.0f/3.0f)* M_PI * radius * radius * radius);
-	}
+float Sphere::area() const {
+	return abs(4.0f * M_PI * pow(radius_, 2.0f));
+}
 
-    std::ostream& Sphere::print(std::ostream& os) const{
-        Shape::print(os);
-        os << "Center:" << "(" << center.x << "," << center.y << "," << center.z << ")" << "\n" << "Radius:" << radius << "\n";
-        return os;
-    }
+float Sphere::volume() const {
+	return abs((4.0f/3.0f)* M_PI * pow(radius_, 3));
+}
 
-    bool Sphere::intersect(Ray const& ray, float& distance){
-        auto normaldirection = glm::normalize(ray.direction);
-        
-        return glm::intersectRaySphere(ray.origin,
-                                       normaldirection,
-                                       center,
-                                       radius * radius,
-                                       distance);
-    }
+std::ostream& Sphere::print(std::ostream& ostream) const{
+	Shape::print(ostream);
+	ostream << "Center: " << "["<< center_.x << ","<< center_.y << ","<< center_.z << "]" << "\n"
+	        << "Radius: " << radius_ <<"\n"<<"\n";
+}
+
+bool Sphere::intersect(Ray ray, float distance){
+		ray.direction = glm::normalize(ray.direction);
+		auto result = glm::intersectRaySphere(ray.origin, ray.direction,
+							center_, pow(radius_, 2), distance);
+		return result;
+}
