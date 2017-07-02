@@ -4,9 +4,10 @@
 #include "box.hpp"
 #include "sphere.hpp"
 
-struct{
+struct Scene{
 
-Shape shape;
+Box box;
+Sphere sphere;
 
 };
 

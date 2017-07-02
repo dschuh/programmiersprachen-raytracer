@@ -5,7 +5,7 @@
 
 struct SdfLoader{
 
-void loadFile(std::string const& path);
+Scene loadFile(std::string const& path);
 
 };
 

@@ -1,9 +1,11 @@
-#include "scene.hpp"
+#include "sdfloader.hpp"
+#include <fstream>
+#include <sstream>
 
-Scene sdfloader::loadFile(std::string const& path){
+
+Scene SdfLoader::loadFile(std::string const& path){
     
     Scene scene;
-
     std::ifstream file;
     file.open(path);
     std::string line;
@@ -11,7 +13,7 @@ Scene sdfloader::loadFile(std::string const& path){
     if(file.is_open()){
         std::cout << "Testlauf \n";
 
-        while(line != null){
+        while(std::getline(file, line)){
             std::stringstream ss;
             std::string keyword;
             ss<<line;

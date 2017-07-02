@@ -3,6 +3,7 @@
 
 #include <glm/vec3.hpp>
 #include "shape.hpp"
+#include "ray.hpp"
 
 class Box : public Shape{
 
@@ -14,14 +15,15 @@ private:
 public:
 
 	Box();
-	Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color, string const& name);
+	Box(glm::vec3 const& min, glm::vec3 const& max, Material const& material, std::string const& name);
 
 	glm::vec3 const& get_min() const;
 	glm::vec3 const& get_max() const;
 
 	float area() const override;
 	float volume() const override;
-	float intersect(Ray const& ray, float& distance) override;
+	
+	bool intersect(Ray const& ray, float& distance) override;
 
 	std::ostream& print(std::ostream& ostream) const override;
 	

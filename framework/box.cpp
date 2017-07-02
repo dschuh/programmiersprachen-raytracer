@@ -8,8 +8,8 @@ Box::Box():
     max_{glm::vec3{1.0f}}
     {}
 
-Box::Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color, string const& name):
-    Shape{name, color},
+Box::Box(glm::vec3 const& min, glm::vec3 const& max, Material const& material, std::string const& name):
+    Shape{name, material},
     min_{glm::vec3{min}},
     max_{glm::vec3{max}}
     {}
@@ -25,13 +25,13 @@ glm::vec3 const& Box::get_max() const
 }
 
 float Box::area() const {
-	return  abs((2 * (max_.x - min_.x) * (max_.y - min_.y)) +
+	return  fabs((2 * (max_.x - min_.x) * (max_.y - min_.y)) +
 			(2 * (max_.x - min_.x) * (max_.z - min_.z)) +
 			(2 * (max_.y - min_.y) * (max_.z - min_.z)));
 }
 
 float Box::volume() const{
-	return  abs((max_.x - min_.x) * (max_.y - min_.y) *	(max_.z - min_.z));
+	return  fabs((max_.x - min_.x) * (max_.y - min_.y) *	(max_.z - min_.z));
 }
 
 std::ostream& Box::print(std::ostream& ostream) const{
@@ -40,7 +40,7 @@ std::ostream& Box::print(std::ostream& ostream) const{
 		    << "Max: " << "["<< max_.x << ","<< max_.y << ","<< max_.z << "]" << "\n";
 }
 
-bool Box::intersect(Ray const& ray ,float& t){
+bool Box::intersect(Ray const& ray ,float& distance){
 	
     float tx1 = (min_.x-ray.origin.x)/ray.direction.x;
     float tx2 = (max_.x-ray.origin.x)/ray.direction.x;

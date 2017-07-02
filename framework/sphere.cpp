@@ -13,37 +13,30 @@ Sphere::Sphere(glm::vec3 const& center, float r):
     radius_{r}
     {}
 
-Sphere::Sphere(glm::vec3 const& center, float r, Color const& color, string const& name):
-    Shape{name, color},
+Sphere::Sphere(glm::vec3 const& center, float r, Material const& material, std::string const& name):
+    Shape{name, material},
     center_{center},
     radius_{r}
     {}    
-<<<<<<< HEAD
 
 Sphere::~Sphere(){
-    std::cout << "Sphere-Destruktor wird auf " << get_name() << " aufgerufen \n";
+    //std::cout << "Sphere-Destruktor wird auf " << get_name() << " aufgerufen \n";
 }
-=======
->>>>>>> b0a8e5889e5176a1bbd8c6e1b5a2f1f04dad6ca8
     
 glm::vec3 const& Sphere::get_center() const{
     return center_;
 }
 
-<<<<<<< HEAD
-float Sphere::get_radius() const{
-=======
 float const& Sphere::get_radius() const{
->>>>>>> b0a8e5889e5176a1bbd8c6e1b5a2f1f04dad6ca8
     return radius_;
 }
 
 float Sphere::area() const {
-	return abs(4.0f * M_PI * pow(radius_, 2.0f));
+	return fabs(4.0f * M_PI * pow(radius_, 2.0f));
 }
 
 float Sphere::volume() const {
-	return abs((4.0f/3.0f)* M_PI * pow(radius_, 3));
+	return fabs((4.0f/3.0f)* M_PI * pow(radius_, 3));
 }
 
 std::ostream& Sphere::print(std::ostream& ostream) const{
@@ -52,9 +45,9 @@ std::ostream& Sphere::print(std::ostream& ostream) const{
 	        << "Radius: " << radius_ <<"\n"<<"\n";
 }
 
-bool Sphere::intersect(Ray ray, float distance){
-		ray.direction = glm::normalize(ray.direction);
-		auto result = glm::intersectRaySphere(ray.origin, ray.direction,
+bool Sphere::intersect(Ray const& ray, float& distance){
+		auto direction = glm::normalize(ray.direction);
+		auto result = glm::intersectRaySphere(ray.origin, direction,
 							center_, pow(radius_, 2), distance);
 		return result;
 }
