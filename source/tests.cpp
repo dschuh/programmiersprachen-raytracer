@@ -4,10 +4,11 @@
 <<<<<<< HEAD
 #include "sphere.hpp"
 #include "box.hpp"
+#include <glm/vec3.hpp>
+#include "shape.cpp"
+#include "ray.cpp"
 
 TEST_CASE("sphere","[sphere]"){
-
-  
 	Sphere def{"Default"};
 	Sphere cust{"Custom", Material{}, glm::vec3(2.0f,4.0f, 3.0f),4.0f};
 	REQUIRE(def.getName() == "Default");
@@ -23,14 +24,14 @@ TEST_CASE("sphere","[sphere]"){
 TEST_CASE("box","[box]"){
 	Box def{"Default"};
 	Box cust{"Custom", Material{}, glm::vec3(2.0f,4.0f, 3.0f),glm::vec3(10.0f,25.0f, 40.0f)};
-    	REQUIRE(def.getName() == "Default");
-    	REQUIRE(def.getMinimum().x == 0.0f);
+    REQUIRE(def.getName() == "Default");
+    REQUIRE(def.getMinimum().x == 0.0f);
 	REQUIRE(def.getMinimum().y == 0.0f);
 	REQUIRE(def.getMinimum().z == 0.0f);
-    	REQUIRE(cust.getMaximum().x == 10.0f);
-    	REQUIRE(cust.getMaximum().y == 25.0f);
-    	REQUIRE(cust.getMaximum().z == 40.0f);
-    	//Get Material Tests einfügen
+    REQUIRE(cust.getMaximum().x == 10.0f);
+    REQUIRE(cust.getMaximum().y == 25.0f);
+    REQUIRE(cust.getMaximum().z == 40.0f);
+    //Get Material Tests einfügen
 	REQUIRE(cust.area() == 2482.0f);
 	REQUIRE(cust.volume() == 6216.0f);
 }
@@ -44,25 +45,20 @@ TEST_CASE("print","[print]"){
 TEST_CASE("intersectRaySphere", "[intersect]"){
     glm::vec3 ray_origin{0.0, 0.0, 0.0};
     glm::vec3 ray_direction{0.0, 0.0, 1.0};
-
     glm::vec3 sphere_center{0.0, 0.0, 5.0};
     float sphere_radius{1.0};
-
     float distance{0.0};
     auto result = glm::intersectRaySphere(
-        ray_origin, ray_direction,
-        sphere_center,
-        sphere_radius * sphere_radius,
-        distance);
+    		ray_origin, 
+			ray_direction,
+    		sphere_center,
+    		sphere_radius * sphere_radius,
+    		distance);
     REQUIRE(distance == Approx(4.0f));
-
     Sphere s {"some_sphere", Material{}, sphere_center, sphere_radius};
-
 	Ray r {ray_origin,ray_direction};
-
 	s.intersect(r,distance);
-
-REQUIRE(distance == Approx(4.0f));
+	REQUIRE(distance == Approx(4.0f));
 }
 
 TEST_CASE("destructors","[destructors]"){
@@ -76,15 +72,6 @@ TEST_CASE("destructors","[destructors]"){
     delete s1;
     delete s2;
 }
-
-=======
-=======
->>>>>>> b0a8e5889e5176a1bbd8c6e1b5a2f1f04dad6ca8
-#include <glm/vec3.hpp>
-#include "shape.cpp"
-#include "sphere.cpp"
-#include "box.cpp"
-#include "ray.cpp"
 
 TEST_CASE("testing box", "[box]"){
 
@@ -104,8 +91,6 @@ REQUIRE(box0.get_name()=="Box");
 REQUIRE(box0.get_color().r==0.0f);
 REQUIRE(box0.get_color().g==0.0f);
 REQUIRE(box0.get_color().b==0.0f);
-
-
 
 Box box1{glm::vec3{3.0f}, glm::vec3{7.0f}, Color{1.0f, 2.0f, 3.0f}, "Kasten1"};
 
@@ -210,10 +195,17 @@ TEST_CASE("Testing intestectSphere function", "[intersect]"){
 
   REQUIRE(sphere.intersect(ray, custom_distance) == true);
 }
-<<<<<<< HEAD
->>>>>>> b0a8e5889e5176a1bbd8c6e1b5a2f1f04dad6ca8
-=======
->>>>>>> b0a8e5889e5176a1bbd8c6e1b5a2f1f04dad6ca8
+
+TEST_CASE("testing box intersect method", "[intersect]"){
+	Box box0{glm::vec3{3.0f}, glm::vec3{7.0f}, Color{1.0f, 2.0f, 3.0f}, "Kasten0"};
+	Ray ray0{{0.0f, 0.0f, 0.0f}, {2.0f, 2.0f, -2.0f}};
+	float distance = 4.0f;
+	REQUIRE(box0.intersect(ray0, distance)==true);
+	Box box1{glm::vec3{3.0f}, glm::vec3{7.0f}, Color{1.0f, 2.0f, 3.0f}, "Kasten1"};
+	Ray ray1{{0.0f, 0.0f, 0.0f}, {2.0f, 2.0f, 2.0f}};
+	float distance = 4.0f;
+	REQUIRE(box1.intersect(ray1, distance)==false);
+}
 
 int main(int argc, char *argv[])
 {

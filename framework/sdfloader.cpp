@@ -18,5 +18,5 @@ Scene sdfloader::loadFile(std::string const& path){
             ss>>keyword;
         }
     }
-    return ss;
+    return scene;
 }
