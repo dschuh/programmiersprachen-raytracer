@@ -4,11 +4,13 @@ SDFloader::SDFloader():
     holdMaterial{}
     {}
 
-void SDFloader::loadMaterial (std::string const& path){
+Scene SDFloader::loadMaterial (std::string const& path){
+    Scene scene;
+
     std::ifstream file;
     file.open(path);
     std::string line;
-    std::vector<Material> matrholder(2);
+    //std::map<std::string, Material>::iterator it = holdMaterial.begin();
     Material matr;
 
     while(std::getline(file,line)){
@@ -34,6 +36,9 @@ void SDFloader::loadMaterial (std::string const& path){
                     
                 }
         }
-        holdMaterial.push_back(matr);
+        scene.materials[matr.name] = matr;
+        //holdMaterial.insert(it,std::pair<std::string, Material> (matr.name,matr));
+        //++it;
     }
+    return scene;
 }

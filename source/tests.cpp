@@ -3,6 +3,7 @@
 #include <catch.hpp>
 #include "sphere.hpp"
 #include "box.hpp"
+#include "sdfloader.hpp"
 
 TEST_CASE("testing box", "[box]"){
 
@@ -146,6 +147,12 @@ TEST_CASE("testing box intersect method", "[intersect]"){
 	Box box1{glm::vec3{3.0f}, glm::vec3{7.0f}, Material{"glass", {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, 0.0f}, "Kasten1"};
 	Ray ray1{{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 2.0f}};
 	REQUIRE(box1.intersect(ray1, distance)==false);
+}
+
+TEST_CASE("sdfloader","[sdfloader]"){
+    SDFloader sdf{};
+    Scene scene = sdf.loadMaterial("/home/isabelle/Dokumente/programmiersprachen-raytracer/framework/material_scene.txt");
+    std::cout << scene.materials.find("red")->second << scene.materials.find("blue")->second ;
 }
 
 int main(int argc, char *argv[])

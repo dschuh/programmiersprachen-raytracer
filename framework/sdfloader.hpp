@@ -6,15 +6,17 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
+#include <map>
 #include "material.hpp"
+#include "scene.hpp"
  
 struct SDFloader
 {
-std::vector<Material> holdMaterial;
+std::map<std::string,Material> holdMaterial;
 public:
 SDFloader();
 
-void loadMaterial (std::string const& path);
+Scene loadMaterial (std::string const& path);
 
 };
 
