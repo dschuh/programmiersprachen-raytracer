@@ -8,9 +8,9 @@
 */
 struct Scene{
 
-std::vector<Shape> shapes;
+//std::vector<Shape> shapes; evtl als shared pointer
 //std::vector<Light> lights;
-//std::vector<Material> materials;
+//std::map<Material> materials;
 //Kamera kamera
 //usw.
 
