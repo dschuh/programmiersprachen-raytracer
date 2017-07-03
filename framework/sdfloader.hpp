@@ -1,12 +1,21 @@
 #ifndef SDFLOADER_HPP
 #define SDFLOADER_HPP
 
-#include "scene.hpp"
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <vector>
+#include "material.hpp"
+ 
+struct SDFloader
+{
+std::vector<Material> holdMaterial;
+public:
+SDFloader();
 
-struct SdfLoader{
-
-Scene loadFile(std::string const& path);
+void loadMaterial (std::string const& path);
 
 };
 
-#endif
+#endif 
