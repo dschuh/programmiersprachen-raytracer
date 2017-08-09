@@ -8,7 +8,6 @@ SDFloader::SDFloader():
 
 Scene SDFloader::loadScene (std::string const& path){
     Scene scene;
-
     std::ifstream file;
     file.open(path);
     std::string line;
@@ -35,6 +34,7 @@ Scene SDFloader::loadScene (std::string const& path){
                     ss >> matr.ks.g;
                     ss >> matr.ks.b;
                     ss >> matr.m; 
+                    scene.materials[matr.name] = matr;
                 }
                 if (keyword == "light"){
                     ss >> lgt.name;
@@ -45,14 +45,15 @@ Scene SDFloader::loadScene (std::string const& path){
                     ss >> lgt.color.g;
                     ss >> lgt.color.b;
                     ss >> lgt.brightness;
+                    scene.lights.push_back(lgt);
                 }
                 if (keyword == "camera"){
                     ss >> scene.camera.name;
                     ss >> scene.camera.fovX;
                 }
             }
-            scene.materials[matr.name] = matr;
-            scene.lights.push_back(lgt);
+            
+            
     }
     return scene;
 }

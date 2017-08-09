@@ -3,13 +3,15 @@
 
 #include <iostream>
 
-struct Camera{ //Error -> missing initializer before struct --- Whaaaaaaaaaaat? Wasn da los?!
+struct Camera{
 
     std::string name;
     float fovX;
 
     Camera();
     Camera(std::string const& nm, float opd);
+
+    friend std::ostream& operator<<(std::ostream& os, Camera const& c);
 
 };
 

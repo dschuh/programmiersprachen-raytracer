@@ -18,8 +18,10 @@ struct Light{
 
     float const& getIntensity();
 
+    friend std::ostream& operator<<(std::ostream& os, Light const& l);
+
 };
 
-std::ostream& operator<<(std::ostream& os, Light const& l)
+
 
 #endif
