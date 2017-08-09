@@ -7,11 +7,9 @@ Light::Light(std::string const& nm, glm::vec3 const& pos, Color const& clr, floa
     name{nm}, position{pos}, color{clr}, brightness{bgts}{}
 
 void Light::setIntensity(){
-    this->intensity = 0.0f * this->brightness; //Was für ein Datentyp ist intensity???
-}
-
-float const& Light::getIntensity(){
-    return this->intensity;
+    this->intensity.a_ = this->color.r * this->brightness; 
+    this->intensity.b_ = this->color.g * this->brightness;
+    this->intensity.c_ = this->color.b * this->brightness;
 }
 
 std::ostream& operator<<(std::ostream& os, Light const& l){

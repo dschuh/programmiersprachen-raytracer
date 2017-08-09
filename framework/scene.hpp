@@ -11,13 +11,19 @@ struct Scene{
 
     Scene():
         lights{},
+        ambiente{},
         materials{},
-        camera{}{}
+        camera{},
+        spheres{},
+        boxes{}{}
         
 
     std::vector<Light> lights;
+    Intensity ambiente;
     std::map<std::string, Material> materials;
     Camera camera;
+    std::vector<Sphere> spheres;
+    std::vector<Box> boxes;
 //usw.
 
 

@@ -9,12 +9,10 @@
 
 class Sphere : public Shape{
 
-private:
+public:
 
 	glm::vec3 center_;
 	float radius_;
-
-public:
 
 	Sphere();
 	Sphere(glm::vec3 const& center, float r);

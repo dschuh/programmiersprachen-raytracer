@@ -7,12 +7,10 @@
 
 class Box : public Shape{
 
-private:
+public:
 
 	glm::vec3 min_;
 	glm::vec3 max_; 
-
-public:
 
 	Box();
 	Box(glm::vec3 const& min, glm::vec3 const& max, Material const& material, std::string const& name);

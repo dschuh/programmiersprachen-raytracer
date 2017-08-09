@@ -6,11 +6,10 @@
 #include "material.hpp"
 
 class Shape{
-private:
+public:
 	Material material_;
 	std::string name_;	
 
-public:
 	Shape();
 	Shape(std::string const& name);
 	Shape(std::string const& name, Material const& material);
