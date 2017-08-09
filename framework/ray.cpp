@@ -5,7 +5,7 @@ Ray::Ray():
 	direction{glm::vec3{0.0}}
 	{}
 
-Ray::Ray(glm::vec3 origin, glm::vec3 direction):
+Ray::Ray(glm::vec3 const& origin, glm::vec3 const& direction):
 	origin{origin},
 	direction{direction}
 	{}

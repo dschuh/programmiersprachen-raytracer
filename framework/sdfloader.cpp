@@ -1,17 +1,19 @@
 #include "sdfloader.hpp"
 
 SDFloader::SDFloader():
-    holdMaterial{}
+    holdMaterial{},
+    holdLights{},
+    cam{}
     {}
 
-Scene SDFloader::loadMaterial (std::string const& path){
+Scene SDFloader::loadScene (std::string const& path){
     Scene scene;
 
     std::ifstream file;
     file.open(path);
     std::string line;
-    //std::map<std::string, Material>::iterator it = holdMaterial.begin();
     Material matr;
+    Light lgt;
 
     while(std::getline(file,line)){
         std::stringstream ss;
@@ -32,13 +34,25 @@ Scene SDFloader::loadMaterial (std::string const& path){
                     ss >> matr.ks.r;
                     ss >> matr.ks.g;
                     ss >> matr.ks.b;
-                    ss >> matr.m;
-                    
+                    ss >> matr.m; 
                 }
-        }
-        scene.materials[matr.name] = matr;
-        //holdMaterial.insert(it,std::pair<std::string, Material> (matr.name,matr));
-        //++it;
+                if (keyword == "light"){
+                    ss >> lgt.name;
+                    ss >> lgt.position.x;
+                    ss >> lgt.position.y;
+                    ss >> lgt.position.z;
+                    ss >> lgt.color.r;
+                    ss >> lgt.color.g;
+                    ss >> lgt.color.b;
+                    ss >> lgt.brightness;
+                }
+                if (keyword == "camera"){
+                    ss >> scene.camera.name;
+                    ss >> scene.camera.fovX;
+                }
+            }
+            scene.materials[matr.name] = matr;
+            scene.lights.push_back(lgt);
     }
     return scene;
 }

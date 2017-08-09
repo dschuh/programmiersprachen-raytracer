@@ -3,16 +3,21 @@
 
 #include "box.hpp"
 #include "sphere.hpp"
+#include "material.hpp"
+#include "light.hpp"
+#include "camera.hpp"
 
 struct Scene{
 
     Scene():
-        materials{}{}
+        lights{},
+        materials{},
+        camera{}{}
+        
 
-//std::vector<Shape> shapes; evtl als shared pointer
-    //std::vector<Light> lights;
+    std::vector<Light> lights;
     std::map<std::string, Material> materials;
-//Kamera kamera
+    Camera camera;
 //usw.
 
 
