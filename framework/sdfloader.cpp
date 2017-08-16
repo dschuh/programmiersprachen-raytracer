@@ -102,13 +102,19 @@ Scene SDFloader::loadScene (std::string const& path){
                         std::shared_ptr<Shape> box = std::make_shared<Box>(min, max, material, name);
                         scene.shapes.push_back(box);
                     }
+                    if (keyword == "composite"){
+                        ss >> keyword;
+                        if(keyword == ""){
+        
+                        }
+                    } 
                 }
             }
             if ( keyword == "ambient"){
                 ss >> scene.ambiente.a_;
                 ss >> scene.ambiente.b_;
                 ss >> scene.ambiente.c_;
-            }           
+            }          
     }
     return scene;
 }

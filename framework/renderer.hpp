@@ -10,6 +10,7 @@
 #ifndef BUW_RENDERER_HPP
 #define BUW_RENDERER_HPP
 
+#include "scene.hpp"
 #include "color.hpp"
 #include "pixel.hpp"
 #include "ppmwriter.hpp"
@@ -20,9 +21,14 @@ class Renderer
 {
 public:
   Renderer(unsigned w, unsigned h, std::string const& file);
+  Renderer(Scene const& scene, unsigned w, unsigned h, std::string const& file);
 
   void render();
   void write(Pixel const& p);
+
+  //Methoden zur Farbberechnung (Licht)
+
+
 
   inline std::vector<Color> const& colorbuffer() const
   {
@@ -30,6 +36,7 @@ public:
   }
 
 private:
+  Scene scene_;
   unsigned width_;
   unsigned height_;
   std::vector<Color> colorbuffer_;

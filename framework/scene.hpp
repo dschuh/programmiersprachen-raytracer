@@ -6,6 +6,8 @@
 #include "light.hpp"
 #include "camera.hpp"
 #include <memory>
+#include <vector>
+#include <map>
 
 struct Scene{
 
