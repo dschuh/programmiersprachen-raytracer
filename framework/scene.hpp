@@ -2,7 +2,6 @@
 #define SCENE_HPP
 
 #include "shape.hpp"
-
 #include "box.hpp"
 #include "sphere.hpp"
 #include "material.hpp"
@@ -10,6 +9,7 @@
 #include "camera.hpp"
 #include <memory>
 
+#include <memory>
 struct Scene{
 
     Scene():

@@ -8,7 +8,7 @@
 #include <vector>
 #include <map>
 #include "scene.hpp"
- 
+
 struct SDFloader
 {
 
