@@ -152,7 +152,7 @@ TEST_CASE("testing box intersect method", "[intersect]"){
 TEST_CASE("sdfloader","[sdfloader]"){
     SDFloader sdf{};
     Scene scene = sdf.loadScene("/home/isabelle/Dokumente/programmiersprachen-raytracer/framework/material_scene.txt");
-    std::cout << scene.materials.find("red")->second << scene.materials.find("blue")->second << scene.lights[0] << scene.camera << scene.spheres[0] << scene.boxes[0] << scene.ambiente.a_;
+    std::cout << scene.materials.find("red")->second << scene.materials.find("blue")->second << scene.lights[0] << scene.camera << scene.shapes[0] << scene.shapes[1] << scene.ambiente.a_;
 }
 
 int main(int argc, char *argv[])
