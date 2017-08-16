@@ -1,27 +1,17 @@
 #include "shape.hpp"
 
 Shape::Shape():
-    name_{"Shape"},
-	material_{}
-    {//std::cout << "Konstruktor wird auf " << name_ << " aufgerufen \n";
-	}
+    name_{"Shape"}, material_{}{}
     
 
 Shape::Shape(std::string const& name):
-	name_{name},
-	material_{}
-	{//std::cout << "Konstruktor wird auf " << name_ << " aufgerufen \n";
-	}
+	name_{name}, material_{}{}
 
-Shape::Shape(std::string const& name, Material const& material):
-	name_{name},
-	material_{material}
-	{//std::cout << "Konstruktor wird auf " << name_ << " aufgerufen \n";
-	}
+Shape::Shape(std::string const& name, std::shared_ptr<Material> const& material):
+	name_{name},material_{material}{}
 
 Shape::~Shape()
-	{//std::cout << "Shape-Destruktor wird auf " << name_ << " aufgerufen \n";
-	}
+    {}
 
 Material const& Shape::get_material() const{
     return material_;
@@ -38,7 +28,7 @@ std::ostream& Shape::print(std::ostream& ostream) const
 	return ostream;
 }
 
-std::ostream& operator <<(std::ostream& ostream, Shape const& s)
+std::ostream& operator <<(std::ostream& ostream, std::shared_ptr<Shape> const& s)
 {
 	return s.print(ostream);
 }

@@ -1,23 +1,16 @@
 #include "material.hpp"
 
 Material::Material():
-    name{"empty"},
-    ka{Color{0.0f, 0.0f, 0.0f}},
-    kd{Color{0.0f, 0.0f, 0.0f}},
-    ks{Color{0.0f, 0.0f, 0.0f}},
-    m{0.0f}{}
+    name{"empty"}, ka_{Color{0.0f, 0.0f, 0.0f}}, kd_{Color{0.0f, 0.0f, 0.0f}}, ks_{Color{0.0f, 0.0f, 0.0f}}, 
+    m_{0.0f}{}
 
 
 Material::Material(std::string const& nm, Color const& ka, Color const& kd, Color const& ks, float m):
-    name{nm},
-    ka{ka},
-    kd{kd},
-    ks{ks},
-    m{m}{}
+    name_{nm}, ka_{ka}, kd_{kd}, ks_{ks}, m_{m}{}
 
-std::ostream& operator<<(std::ostream& os, Material const& m){
-    os << "Name:" << m.name << "\n ka:" << m.ka << "\n kd:" << m.kd << "\n ks:" << m.ks
-       << "\n m:" << m.m << "\n";
+std::ostream& operator<<(std::ostream& os, std::shared_ptr<Material> const& m){
+    os << "Name:" << m.name_ << "\n ka:" << m.ka_ << "\n kd:" << m.kd_ << "\n ks:" << m.ks_
+       << "\n m:" << m.m_ << "\n";
 
     return os;
 

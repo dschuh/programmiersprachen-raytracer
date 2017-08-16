@@ -11,18 +11,13 @@
 
 struct Scene{
 
-//Brauchen wir boxes uns spheres oder reichen shapes?
     Scene():
-        lights{},
-        ambiente{},
-        materials{},
-        camera{},
-        shapes{}{}
+        lights{}, ambiente{}, materials{}, camera{}, shapes{}{}
         
-    std::vector<Light> lights;
+    std::vector<std::shared_ptr<Light>> lights;
     Intensity ambiente;
-    std::map<std::string, Material> materials;
-    Camera camera;
+    std::map<std::string, std::shared_ptr<Material>> materials;
+    std::shared_ptr<Camera> camera;
     std::vector<std::shared_ptr<Shape>> shapes;
 
 

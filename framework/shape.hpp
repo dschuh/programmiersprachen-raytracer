@@ -4,15 +4,13 @@
 #include "color.hpp"
 #include "ray.hpp"
 #include "material.hpp"
+#include <memory>
 
 class Shape{
 public:
-	Material material_;
-	std::string name_;	
-
 	Shape();
 	Shape(std::string const& name);
-	Shape(std::string const& name, Material const& material);
+	Shape(std::string const& name, std::shared_ptr<Material> const& material);
 
 	~Shape();
 
@@ -23,8 +21,13 @@ public:
 	virtual float volume() const =0;
 	virtual std::ostream& print(std::ostream& os) const=0;
 	virtual bool intersect (Ray const& ray, float& t)=0;
+
+private:
+    std::shared_ptr<Material> material_;
+	std::string name_;	
+
 };
 
-std::ostream& operator <<(std::ostream& ostream, Shape const& shape);
+std::ostream& operator <<(std::ostream& ostream, std::shared<Shape> const& shape);
 
 #endif
