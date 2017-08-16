@@ -11,14 +11,6 @@
  
 struct SDFloader
 {
-std::map<std::string,Material> holdMaterial;
-std::vector<Light> holdLights;
-Intensity amb;
-Camera cam;
-std::vector<Sphere> holdSpheres;
-std::vector<Box> holdBoxes;
-
-SDFloader();
 
 Scene loadScene (std::string const& path);
 

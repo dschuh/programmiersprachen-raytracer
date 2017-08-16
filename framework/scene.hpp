@@ -8,6 +8,7 @@
 #include "material.hpp"
 #include "light.hpp"
 #include "camera.hpp"
+#include <memory>
 
 struct Scene{
 
@@ -17,16 +18,14 @@ struct Scene{
         ambiente{},
         materials{},
         camera{},
-        spheres{},
-        boxes{}{}
+        shapes{}{}
         
     std::vector<Light> lights;
     Intensity ambiente;
     std::map<std::string, Material> materials;
     Camera camera;
-    std::shared_ptr<Shape>
-    std::vector<Sphere> spheres;
-    std::vector<Box> boxes;
+    std::vector<std::shared_ptr<Shape>> shapes;
+
 
 
 };

@@ -1,13 +1,5 @@
 #include "sdfloader.hpp"
 
-SDFloader::SDFloader():
-    holdMaterial{},
-    holdLights{},
-    amb{},
-    cam{},
-    holdSpheres{},
-    holdBoxes{}{}
-
 Scene SDFloader::loadScene (std::string const& path){
     Scene scene;
     std::ifstream file;
@@ -17,6 +9,7 @@ Scene SDFloader::loadScene (std::string const& path){
     Light lgt;
     Sphere spr;
     Box bx;
+    std::shared_ptr<Shape> hold;
 
     while(std::getline(file,line)){
         std::stringstream ss;
@@ -65,7 +58,8 @@ Scene SDFloader::loadScene (std::string const& path){
                         ss >> keyword;
                         spr.material_ = scene.materials.find(keyword)->second;
                         ss >> spr.name_;
-                        scene.spheres.push_back(spr);
+                        hold box = make_shared<Box>();
+                        scene.shapes.push_back(box);
                     }
                     if (keyword == "box"){
                         ss >> bx.min_.x;
@@ -77,7 +71,7 @@ Scene SDFloader::loadScene (std::string const& path){
                         ss >> keyword;
                         bx.material_ = scene.materials.find(keyword)->second;
                         ss >> bx.name_;
-                        scene.boxes.push_back(bx);
+                        scene.shapes.push_back(bx);
                     }
                 }
             }
