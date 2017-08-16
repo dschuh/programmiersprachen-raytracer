@@ -3,19 +3,20 @@
 
 #include "color.hpp"
 #include <string>
+#include <memory>
 
 struct Material{
 
-    std::string name;
-    Color ka;
-    Color kd;
-    Color ks;
-    float m;
+    std::string name_;
+    Color ka_;
+    Color kd_;
+    Color ks_;
+    float m_;
 
     Material();
     Material(std::string const& nm, Color const& ka, Color const& kd, Color const& ks, float m);
 
-    friend std::ostream& operator<<(std::ostream& os, Material const& m);
+    friend std::ostream& operator<<(std::ostream& os, std::shared_ptr<Material> const& m);
     
 };
 

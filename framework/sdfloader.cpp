@@ -9,7 +9,6 @@ Scene SDFloader::loadScene (std::string const& path){
     Light lgt;
     Sphere spr;
     Box bx;
-    std::shared_ptr<Shape> hold;
 
     while(std::getline(file,line)){
         std::stringstream ss;
@@ -51,27 +50,39 @@ Scene SDFloader::loadScene (std::string const& path){
                 if (keyword == "shape"){
                     ss >> keyword;
                     if (keyword == "sphere"){
-                        ss >> spr.center_.x;
-                        ss >> spr.center_.y;
-                        ss >> spr.center_.z;
-                        ss >> spr.radius_;
+                        glm::vec3 center;
+                        float radius;
+                        Material material;
+                        std::string name;
+
+                        ss >> center.x;
+                        ss >> center.y;
+                        ss >> center.z;
+                        ss >> radius;
                         ss >> keyword;
-                        spr.material_ = scene.materials.find(keyword)->second;
-                        ss >> spr.name_;
-                        hold box = make_shared<Box>();
-                        scene.shapes.push_back(box);
+                        material = scene.materials.find(keyword)->second;
+                        ss >> name;
+                        std::shared_ptr<Shape> sphere = std::make_shared<Sphere>(center,radius,material,name);
+                        scene.shapes.push_back(sphere);
                     }
                     if (keyword == "box"){
-                        ss >> bx.min_.x;
-                        ss >> bx.min_.y;
-                        ss >> bx.min_.z;
-                        ss >> bx.max_.x;
-                        ss >> bx.max_.y;
-                        ss >> bx.max_.z;
+
+                        glm::vec3 min;
+                        glm::vec3 max;
+                        Material material;
+                        std::string name;
+
+                        ss >> min.x;
+                        ss >> min.y;
+                        ss >> min.z;
+                        ss >> max.x;
+                        ss >> max.y;
+                        ss >> max.z;
                         ss >> keyword;
-                        bx.material_ = scene.materials.find(keyword)->second;
-                        ss >> bx.name_;
-                        scene.shapes.push_back(bx);
+                        material = scene.materials.find(keyword)->second;
+                        ss >> name;
+                        std::shared_ptr<Shape> box = std::make_shared<Box>(min, max, material, name);
+                        scene.shapes.push_back(box);
                     }
                 }
             }

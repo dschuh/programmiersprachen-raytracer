@@ -8,7 +8,7 @@ Box::Box():
     max_{glm::vec3{1.0f}}
     {}
 
-Box::Box(glm::vec3 const& min, glm::vec3 const& max, Material const& material, std::string const& name):
+Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::shared_ptr<Material> const& material, std::string const& name):
     Shape{name, material},
     min_{glm::vec3{min}},
     max_{glm::vec3{max}}

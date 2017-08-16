@@ -4,18 +4,18 @@ Light::Light():
     name{"Default"}, position{glm::vec3{0.0f, 0.0f, 0.0f}}, color{Color{0.0f, 0.0f, 0.0f}}, brightness{0.0f}{}
 
 Light::Light(std::string const& nm, glm::vec3 const& pos, Color const& clr, float bgts):
-    name{nm}, position{pos}, color{clr}, brightness{bgts}{}
+    name_{nm}, position_{pos}, color_{clr}, brightness_{bgts}{}
 
 void Light::setIntensity(){
-    this->intensity.a_ = this->color.r * this->brightness; 
-    this->intensity.b_ = this->color.g * this->brightness;
-    this->intensity.c_ = this->color.b * this->brightness;
+    this->intensity_.a_ = this->color_.r * this->brightness_; 
+    this->intensity_.b_ = this->color_.g * this->brightness_;
+    this->intensity_.c_ = this->color_.b * this->brightness_;
 }
 
 std::ostream& operator<<(std::ostream& os, Light const& l){
-    os << "Name:" << l.name << "\n" << "Position:" << "{" << l.position.x << "," << l.position.y << "," 
-        << l.position.z << "}" << "\n" << "Color:" << "{" << l.color.r << "," << l.color.g << "," 
-        << l.color.b << "}" << "\n" << "Brightness:" << l.brightness << "\n";
+    os << "Name:" << l.name_ << "\n" << "Position:" << "{" << l.position_.x << "," << l.position_.y << "," 
+        << l.position_.z << "}" << "\n" << "Color:" << "{" << l.color_.r << "," << l.color_.g << "," 
+        << l.color_.b << "}" << "\n" << "Brightness:" << l.brightness_ << "\n";
 
     return os;
 
