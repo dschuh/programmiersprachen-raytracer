@@ -2,14 +2,13 @@
 #define SCENE_HPP
 
 #include "shape.hpp"
-#include "box.hpp"
-#include "sphere.hpp"
 #include "material.hpp"
 #include "light.hpp"
 #include "camera.hpp"
 #include <memory>
+#include <vector>
+#include <map>
 
-#include <memory>
 struct Scene{
 
 //Brauchen wir boxes uns spheres oder reichen shapes?

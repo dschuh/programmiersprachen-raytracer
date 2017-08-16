@@ -78,13 +78,19 @@ Scene SDFloader::loadScene (std::string const& path){
                         ss >> bx.name_;
                         scene.shapes.push_back(bx);
                     }
+                    if (keyword == "composite"){
+                        ss >> keyword;
+                        if(keyword == ""){
+        
+                        }
+                    } 
                 }
             }
             if ( keyword == "ambient"){
                 ss >> scene.ambiente.a_;
                 ss >> scene.ambiente.b_;
                 ss >> scene.ambiente.c_;
-            }           
+            }          
     }
     return scene;
 }
