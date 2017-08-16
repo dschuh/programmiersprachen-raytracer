@@ -1,6 +1,4 @@
 #include "box.hpp"
-#include <glm/vec3.hpp>
-#include <cmath>
 
 Box::Box():
     Shape{"Box"},
@@ -42,20 +40,20 @@ std::ostream& Box::print(std::ostream& ostream) const{
 
 bool Box::intersect(Ray const& ray ,float& distance){
 	
-    float tx1 = (min_.x-ray.origin.x)/ray.direction.x;
-    float tx2 = (max_.x-ray.origin.x)/ray.direction.x;
+    float tx1 = (min_.x-ray.origin_.x)/ray.direction_.x;
+    float tx2 = (max_.x-ray.origin_.x)/ray.direction_.x;
  
     float tfarx=std::max(tx1, tx2);
     float tnearx=std::min(tx1, tx2);
 
-    float ty1 = (min_.y-ray.origin.y)/ray.direction.y;
-    float ty2 = (max_.y-ray.origin.y)/ray.direction.y;
+    float ty1 = (min_.y-ray.origin_.y)/ray.direction_.y;
+    float ty2 = (max_.y-ray.origin_.y)/ray.direction_.y;
   
     float tfary=std::max(ty1, ty2);
     float tneary=std::min(ty1, ty2);
 
-    float tz1 = (min_.z-ray.origin.z)/ray.direction.z;
-    float tz2 = (max_.z-ray.origin.z)/ray.direction.z;
+    float tz1 = (min_.z-ray.origin_.z)/ray.direction_.z;
+    float tz2 = (max_.z-ray.origin_.z)/ray.direction_.z;
 
     float tfarz=std::max(tz1, tz2);
     float tnearz=std::min(tz1, tz2);

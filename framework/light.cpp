@@ -1,7 +1,7 @@
 #include "light.hpp"
 
 Light::Light():
-    name{"Default"}, position{glm::vec3{0.0f, 0.0f, 0.0f}}, color{Color{0.0f, 0.0f, 0.0f}}, brightness{0.0f}{}
+    name_{"Default"}, position_{glm::vec3{0.0f, 0.0f, 0.0f}}, color_{Color{0.0f, 0.0f, 0.0f}}, brightness_{0.0f}{}
 
 Light::Light(std::string const& nm, glm::vec3 const& pos, Color const& clr, float bgts):
     name_{nm}, position_{pos}, color_{clr}, brightness_{bgts}{}

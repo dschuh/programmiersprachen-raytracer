@@ -13,7 +13,7 @@ Sphere::Sphere(glm::vec3 const& center, float r):
     radius_{r}
     {}
 
-Sphere::Sphere(glm::vec3 const& center, float r, Material const& material, std::string const& name):
+Sphere::Sphere(glm::vec3 const& center, float r, std::shared_ptr<Material> const& material, std::string const& name):
     Shape{name, material},
     center_{center},
     radius_{r}
@@ -46,8 +46,8 @@ std::ostream& Sphere::print(std::ostream& ostream) const{
 }
 
 bool Sphere::intersect(Ray const& ray, float& distance){
-		auto direction = glm::normalize(ray.direction);
-		auto result = glm::intersectRaySphere(ray.origin, direction,
+		auto direction = glm::normalize(ray.direction_);
+		auto result = glm::intersectRaySphere(ray.origin_, direction,
 							center_, pow(radius_, 2), distance);
 		return result;
 }

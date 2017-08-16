@@ -13,7 +13,7 @@ Shape::Shape(std::string const& name, std::shared_ptr<Material> const& material)
 Shape::~Shape()
     {}
 
-Material const& Shape::get_material() const{
+std::shared_ptr<Material> const& Shape::get_material() const{
     return material_;
 }
 
@@ -24,11 +24,11 @@ std::string const& Shape::get_name() const{
 std::ostream& Shape::print(std::ostream& ostream) const
 {
 	ostream << "Name: "<< name_ << "\n"
-			<< "Material: " << material_;
+			<< "Material: " << *material_;
 	return ostream;
 }
 
-std::ostream& operator <<(std::ostream& ostream, std::shared_ptr<Shape> const& s)
+std::ostream& operator <<(std::ostream& ostream, Shape const& s)
 {
 	return s.print(ostream);
 }

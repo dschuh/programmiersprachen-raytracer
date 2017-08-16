@@ -1,7 +1,4 @@
 #include "sdfloader.hpp"
-#include "camera.hpp"
-#include "intensity.hpp"
-#include "light.hpp"
  
 
 Scene SDFloader::loadScene (std::string const& path){
@@ -20,44 +17,60 @@ Scene SDFloader::loadScene (std::string const& path){
             if (keyword == "define"){
                 ss >> keyword;
                if (keyword == "material"){
-                    Material matr;
-                    ss >> matr.name;
-                    ss >> matr.ka.r;
-                    ss >> matr.ka.g;
-                    ss >> matr.ka.b;
-                    ss >> matr.kd.r;
-                    ss >> matr.kd.g;
-                    ss >> matr.kd.b;
-                    ss >> matr.ks.r;
-                    ss >> matr.ks.g;
-                    ss >> matr.ks.b;
-                    ss >> matr.m; 
-                    scene.materials[matr.name] = matr;
+                    std::string name;
+                    Color ka;
+                    Color kd;
+                    Color ks;
+                    float m;
+
+                    ss >> name;
+                    ss >> ka.r;
+                    ss >> ka.g;
+                    ss >> ka.b;
+                    ss >> kd.r;
+                    ss >> kd.g;
+                    ss >> kd.b;
+                    ss >> ks.r;
+                    ss >> ks.g;
+                    ss >> ks.b;
+                    ss >> m; 
+                    std::shared_ptr<Material> matr = std::make_shared<Material>(name, ka, kd, ks, m);
+                    scene.materials[name] = matr;
                 }
                 if (keyword == "light"){
-                    Light lgt;
-                    ss >> lgt.name;
-                    ss >> lgt.position.x;
-                    ss >> lgt.position.y;
-                    ss >> lgt.position.z;
-                    ss >> lgt.color.r;
-                    ss >> lgt.color.g;
-                    ss >> lgt.color.b;
-                    ss >> lgt.brightness;
-                    scene.lights.push_back(lgt);
+                    std::string name;
+                    glm::vec3 position;
+                    Color color;                    
+                    float brightness;
+
+                    ss >> name;
+                    ss >> position.x;
+                    ss >> position.y;
+                    ss >> position.z;
+                    ss >> color.r;
+                    ss >> color.g;
+                    ss >> color.b;
+                    ss >> brightness;
+
+                    std::shared_ptr<Light> light = std::make_shared<Light>(name,position,color,brightness);
+                    scene.lights.push_back(light);
                 }
                 if (keyword == "camera"){
-                    Camera cam;
-                    ss >> cam.name;
-                    ss >> cam.fovX;
-                    scene.camera = cam;
+                    std::string name;
+                    float fov_x;
+                    
+                    ss >> name;
+                    ss >> fov_x;  
+  
+                    std::shared_ptr<Camera> camera = std::make_shared<Camera>(name,fov_x);
+                    scene.camera = camera;
                 }
                 if (keyword == "shape"){
                     ss >> keyword;
                     if (keyword == "sphere"){
                         glm::vec3 center;
                         float radius;
-                        Material material;
+                        std::shared_ptr<Material> material;
                         std::string name;
 
                         ss >> center.x;
@@ -74,7 +87,7 @@ Scene SDFloader::loadScene (std::string const& path){
 
                         glm::vec3 min;
                         glm::vec3 max;
-                        Material material;
+                        std::shared_ptr<Material> material;
                         std::string name;
 
                         ss >> min.x;

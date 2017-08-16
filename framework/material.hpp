@@ -16,7 +16,7 @@ struct Material{
     Material();
     Material(std::string const& nm, Color const& ka, Color const& kd, Color const& ks, float m);
 
-    friend std::ostream& operator<<(std::ostream& os, std::shared_ptr<Material> const& m);
+    friend std::ostream& operator<<(std::ostream& os, Material const& m);
     
 };
 

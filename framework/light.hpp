@@ -18,7 +18,7 @@ struct Light{
     Light();
     Light(std::string const& nm, glm::vec3 const& pos, Color const& clr, float bgts);
 
-    friend std::ostream& operator<<(std::ostream& os, std::shared_ptr<Light> const& l);
+    friend std::ostream& operator<<(std::ostream& os, Light const& l);
 
 };
 

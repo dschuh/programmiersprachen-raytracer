@@ -12,7 +12,7 @@ struct Camera{
     Camera();
     Camera(std::string const& nm, float opd);
 
-    friend std::ostream& operator<<(std::ostream& os, std::shared_ptr<Camera> const& c);
+    friend std::ostream& operator<<(std::ostream& os, Camera const& c);
 
 };
 

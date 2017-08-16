@@ -6,6 +6,7 @@
 #include <glm/gtx/intersect.hpp>
 #include "shape.hpp"
 #include "ray.hpp"
+#include <cmath>
 
 class Sphere : public Shape{
 
@@ -16,7 +17,7 @@ public:
 
 	Sphere();
 	Sphere(glm::vec3 const& center, float r);
-	Sphere(glm::vec3 const& center, float r, Material const& material, std::string const& name);
+	Sphere(glm::vec3 const& center, float r, std::shared_ptr<Material> const& material, std::string const& name);
 	~Sphere();
 
 	glm::vec3 const& get_center() const;

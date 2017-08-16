@@ -1,7 +1,6 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include "color.hpp"
 #include "ray.hpp"
 #include "material.hpp"
 #include <memory>
@@ -14,7 +13,7 @@ public:
 
 	~Shape();
 
-	Material const& get_material() const;
+	std::shared_ptr<Material> const& get_material() const;
 	std::string const& get_name() const;
 
 	virtual float area() const =0;
@@ -28,6 +27,6 @@ private:
 
 };
 
-std::ostream& operator <<(std::ostream& ostream, std::shared<Shape> const& shape);
+std::ostream& operator <<(std::ostream& ostream, Shape const& shape);
 
 #endif
