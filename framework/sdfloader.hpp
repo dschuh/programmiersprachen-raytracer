@@ -8,10 +8,10 @@
 #include <vector>
 #include <map>
 #include "scene.hpp"
- 
+
 struct SDFloader
 {
-std::map<std::string,Material> holdMaterial;
+std::map<std::string, Material> holdMaterial;
 std::vector<Light> holdLights;
 Intensity amb;
 Camera cam;

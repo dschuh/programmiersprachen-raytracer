@@ -11,12 +11,9 @@ class Composite : public Shape
     Composite(std::string const& name);
     ~Composite();
 
-
-
-
-
 private:
     std::string m_name;
     std::shared_ptr<Shape>
+    
 };
 #endif

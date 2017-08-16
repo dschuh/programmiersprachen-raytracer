@@ -1,4 +1,8 @@
 #include "sdfloader.hpp"
+#include "camera.hpp"
+#include "intensity.hpp"
+#include "light.hpp"
+ 
 
 SDFloader::SDFloader():
     holdMaterial{},
@@ -13,8 +17,6 @@ Scene SDFloader::loadScene (std::string const& path){
     std::ifstream file;
     file.open(path);
     std::string line;
-    Material matr;
-    Light lgt;
     Sphere spr;
     Box bx;
 
@@ -41,6 +43,7 @@ Scene SDFloader::loadScene (std::string const& path){
                     scene.materials[matr.name] = matr;
                 }
                 if (keyword == "light"){
+                    Light lgt;
                     ss >> lgt.name;
                     ss >> lgt.position.x;
                     ss >> lgt.position.y;
@@ -52,8 +55,10 @@ Scene SDFloader::loadScene (std::string const& path){
                     scene.lights.push_back(lgt);
                 }
                 if (keyword == "camera"){
-                    ss >> scene.camera.name;
-                    ss >> scene.camera.fovX;
+                    Camera cam;
+                    ss >> cam.name;
+                    ss >> cam.fovX;
+                    scene.camera = cam;
                 }
                 if (keyword == "shape"){
                     ss >> keyword;
