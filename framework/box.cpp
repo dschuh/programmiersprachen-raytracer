@@ -39,7 +39,7 @@ std::ostream& Box::print(std::ostream& ostream) const{
 }
 
 Hit Box::intersect(Ray const& ray ,float& distance){
-	
+	Hit hit = Hit();
     float tx1 = (min_.x-ray.origin_.x)/ray.direction_.x;
     float tx2 = (max_.x-ray.origin_.x)/ray.direction_.x;
  
@@ -61,15 +61,22 @@ Hit Box::intersect(Ray const& ray ,float& distance){
     float tfar=std::max(tfarx, tfary);
     float tnear=std::min(tnearx, tneary);
 
-    if(tfar<tnear){
-    	return false;
+    if(tfar>tnear){
+        hit.hit = true;
+        hit.hitray = ray;
+        hit.hitpos = glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.m_origin;
+        hit.shape = this;
     }
  
     tfar=std::min(tfar, tfarz);
     tnear=std::max(tnear, tnearz);
 
-    if((tfar<0) || (tfar<tnear)){
-       return false;
+    if((tfar>0) || (tfar>tnear)){
+        hit.hit = true;
+        hit.hitray = ray;
+        hit.hitpos =  glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.m_origin;
+        hit.shape = this;
     }
-    return true;
+
+    return hit;
 }

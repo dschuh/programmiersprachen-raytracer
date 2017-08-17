@@ -2,6 +2,7 @@
 
 Hit::Hit(){
     hit = false;
-    shape = nullptr;
     hitray = Ray();
+    hitpos = glm::vec3();
+    shape = nullptr;
 }
