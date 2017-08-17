@@ -45,8 +45,9 @@ std::ostream& Sphere::print(std::ostream& ostream) const{
 	        << "Radius: " << radius_ <<"\n"<<"\n";
 }
 
-bool Sphere::intersect(Ray const& ray, float& distance){
-		auto direction = glm::normalize(ray.direction_);
+Hit Sphere::intersect(Ray const& ray, float& distance){
+        auto direction = glm::normalize(ray.direction_);
+        auto intersectionPosition = ray.origin_ + direction * distance;
 		auto result = glm::intersectRaySphere(ray.origin_, direction,
 							center_, pow(radius_, 2), distance);
 		return result;

@@ -5,6 +5,9 @@
 #include "material.hpp"
 #include <memory>
 
+//forward-declare inclompete type
+struct Hit;
+
 class Shape{
 public:
 	Shape();
@@ -19,7 +22,7 @@ public:
 	virtual float area() const =0;
 	virtual float volume() const =0;
 	virtual std::ostream& print(std::ostream& os) const=0;
-	virtual bool intersect (Ray const& ray, float& t)=0;
+	virtual Hit intersect (Ray const& ray, float& t)=0;
 
 private:
     std::shared_ptr<Material> material_;

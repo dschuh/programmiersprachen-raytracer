@@ -38,7 +38,7 @@ std::ostream& Box::print(std::ostream& ostream) const{
 		    << "Max: " << "["<< max_.x << ","<< max_.y << ","<< max_.z << "]" << "\n";
 }
 
-bool Box::intersect(Ray const& ray ,float& distance){
+Hit Box::intersect(Ray const& ray ,float& distance){
 	
     float tx1 = (min_.x-ray.origin_.x)/ray.direction_.x;
     float tx2 = (max_.x-ray.origin_.x)/ray.direction_.x;

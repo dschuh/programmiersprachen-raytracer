@@ -19,9 +19,6 @@ struct Scene{
     std::map<std::string, std::shared_ptr<Material>> materials;
     std::shared_ptr<Camera> camera;
     std::vector<std::shared_ptr<Shape>> shapes;
-
-
-
 };
 
 #endif
