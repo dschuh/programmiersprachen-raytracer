@@ -3,6 +3,7 @@
 
 #include "ray.hpp"
 #include "material.hpp"
+#include "hit.hpp"
 #include <memory>
 
 //forward-declare inclompete type

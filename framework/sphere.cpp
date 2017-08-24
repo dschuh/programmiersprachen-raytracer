@@ -52,6 +52,6 @@ Hit Sphere::intersect(Ray const& ray, float& distance){
         hit.hitray = ray;
         hit.hitpos = ray.origin_ + direction * distance;
         //!! geht das mit this?
-        hit.shape = this;
+        hit.shape = std::shared_ptr<Sphere>(this);
 		return hit;
 }

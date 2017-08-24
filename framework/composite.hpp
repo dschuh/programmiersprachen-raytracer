@@ -13,7 +13,7 @@ class Composite : public Shape
 
 private:
     std::string m_name;
-    std::shared_ptr<Shape>
+    std::shared_ptr<Shape> composite;
     
 };
 #endif

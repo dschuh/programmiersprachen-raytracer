@@ -81,7 +81,7 @@ Scene SDFloader::loadScene (std::string const& path){
                         material = scene.materials.find(keyword)->second;
                         ss >> name;
                         std::shared_ptr<Shape> sphere = std::make_shared<Sphere>(center,radius,material,name);
-                        scene.shapes.push_back(sphere);
+                        scene.shapes[name] = sphere;
                     }
                     if (keyword == "box"){
 
@@ -100,13 +100,20 @@ Scene SDFloader::loadScene (std::string const& path){
                         material = scene.materials.find(keyword)->second;
                         ss >> name;
                         std::shared_ptr<Shape> box = std::make_shared<Box>(min, max, material, name);
-                        scene.shapes.push_back(box);
+                        scene.shapes[name] = box;
                     }
                     if (keyword == "composite"){
-                        ss >> keyword;
-                        if(keyword == ""){
-        
+                        std::string name;
+                        std::vector<std::shared_ptr<Shape>> layer;
+
+                        ss >> name;
+                        while(ss){
+                            ss >> keyword;
+                            std::shared_ptr<Shape> object = scene.shapes.find(keyword)->second;
+                            layer.push_back(object);
                         }
+                        
+                        scene.composite[name] = layer;
                     } 
                 }
             }

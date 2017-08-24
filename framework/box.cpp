@@ -64,8 +64,8 @@ Hit Box::intersect(Ray const& ray ,float& distance){
     if(tfar>tnear){
         hit.hit = true;
         hit.hitray = ray;
-        hit.hitpos = glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.m_origin;
-        hit.shape = this;
+        hit.hitpos = glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.origin_;
+        hit.shape = std::shared_ptr<Box>(this);
     }
  
     tfar=std::min(tfar, tfarz);
@@ -74,8 +74,8 @@ Hit Box::intersect(Ray const& ray ,float& distance){
     if((tfar>0) || (tfar>tnear)){
         hit.hit = true;
         hit.hitray = ray;
-        hit.hitpos =  glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.m_origin;
-        hit.shape = this;
+        hit.hitpos =  glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.origin_;
+        hit.shape = std::shared_ptr<Box>(this);
     }
 
     return hit;
