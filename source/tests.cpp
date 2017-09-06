@@ -150,7 +150,19 @@ TEST_CASE("testing box intersect method", "[intersect]"){
 TEST_CASE("sdfloader","[sdfloader]"){
     SDFloader sdf{};
     Scene scene = sdf.loadScene("/home/isabelle/Dokumente/programmiersprachen-raytracer/framework/material_scene.txt");
-    std::cout << *scene.materials.find("red")->second << *scene.materials.find("blue")->second << *scene.lights[0] << *scene.camera<< *scene.shapes[0] << scene.ambiente.a_;
+    std::cout << *scene.materials.find("red")->second << *scene.materials.find("blue")->second << *scene.lights[0] << *scene.camera<< *scene.shapes.find("bsphere")->second << scene.ambiente.a_;
+}
+
+TEST_CASE("intersect","[intersect]"){
+    SDFloader sdf{};
+    Scene scene = sdf.loadScene("/home/isabelle/Dokumente/programmiersprachen-raytracer/framework/material_scene.txt");
+    //std::shared_ptr<Material> glass = std::make_shared<Material>("glass", {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, 0.0f);
+    Box box0{glm::vec3{3.0f}, glm::vec3{7.0f, 7.0f, -7.0f}, scene.materials.find("blue")->second, "Kasten0"};
+    Sphere sphere{{0.0f, 0.0f, 4.0f}, 1.0f, scene.materials.find("red")->second, "Sphere"};
+    Ray ray1{{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 2.0f}};
+    float distance = 20.0f;
+    std::cout << box0.intersect(ray1, distance).hitpos.x;
+    std::cout << sphere.intersect(ray1, distance).hit;
 }
 
 int main(int argc, char *argv[])

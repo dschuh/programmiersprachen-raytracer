@@ -45,7 +45,7 @@ std::ostream& Sphere::print(std::ostream& ostream) const{
 	        << "Radius: " << radius_ <<"\n"<<"\n";
 }
 
-Hit Sphere::intersect(Ray const& ray, float& distance){
+Hit Sphere::intersect(Ray const& ray, float& distance){ //funktioniert ebenfalls nicht? Vll bin ich auch zu doof, um den test richtig zu schreiben.
         Hit hit = Hit();
         auto direction = glm::normalize(ray.direction_);
         hit.hit = glm::intersectRaySphere(ray.origin_, direction, center_, pow(radius_, 2), distance);
