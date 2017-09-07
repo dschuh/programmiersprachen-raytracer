@@ -3,7 +3,6 @@
 
 #include <glm/vec3.hpp>
 #include "color.hpp"
-#include "intensity.hpp"
 #include <memory>
 
 struct Light{
@@ -11,9 +10,8 @@ struct Light{
     glm::vec3 position_;
     Color color_;
     float brightness_;
-    Intensity intensity_;
 
-    void setIntensity();
+    Color setIntensity() const;
 
     Light();
     Light(std::string const& nm, glm::vec3 const& pos, Color const& clr, float bgts);

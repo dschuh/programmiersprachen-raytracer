@@ -6,10 +6,12 @@ Light::Light():
 Light::Light(std::string const& nm, glm::vec3 const& pos, Color const& clr, float bgts):
     name_{nm}, position_{pos}, color_{clr}, brightness_{bgts}{}
 
-void Light::setIntensity(){
-    this->intensity_.a_ = this->color_.r * this->brightness_; 
-    this->intensity_.b_ = this->color_.g * this->brightness_;
-    this->intensity_.c_ = this->color_.b * this->brightness_;
+Color Light::setIntensity()const {
+    Color intensity{};
+    intensity.r = this -> color_.r * brightness_; 
+    intensity.g = this -> color_.g * brightness_;
+    intensity.b = this -> color_.b * brightness_;
+    return intensity;
 }
 
 std::ostream& operator<<(std::ostream& os, Light const& l){

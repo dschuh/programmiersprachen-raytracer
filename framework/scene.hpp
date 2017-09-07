@@ -16,7 +16,7 @@ struct Scene{
         lights{}, ambiente{}, materials{}, camera{}, shapes{}{}
         
     std::vector<std::shared_ptr<Light>> lights;
-    Intensity ambiente;
+    Color ambiente;
     std::map<std::string, std::shared_ptr<Material>> materials;
     std::shared_ptr<Camera> camera;
     std::map<std::string, std::shared_ptr<Shape>> shapes;

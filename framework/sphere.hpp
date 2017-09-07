@@ -28,7 +28,8 @@ public:
 
 	std::ostream& print(std::ostream& ostream) const override;
 
-	Hit intersect(Ray const& ray, float& distance) override;	
+	Hit intersect(Ray const& ray, float& distance) override;
+    Color compute_light(Color const& ambient, Light const& light, Ray const& r);	
 
 };
 

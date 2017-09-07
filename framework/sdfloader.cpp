@@ -118,9 +118,9 @@ Scene SDFloader::loadScene (std::string const& path){
                 }
             }
             if ( keyword == "ambient"){
-                ss >> scene.ambiente.a_;
-                ss >> scene.ambiente.b_;
-                ss >> scene.ambiente.c_;
+                ss >> scene.ambiente.r;
+                ss >> scene.ambiente.g;
+                ss >> scene.ambiente.b;
             }          
     }
     return scene;

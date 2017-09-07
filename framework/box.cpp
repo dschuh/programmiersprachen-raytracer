@@ -38,7 +38,7 @@ std::ostream& Box::print(std::ostream& ostream) const{
 		    << "Max: " << "["<< max_.x << ","<< max_.y << ","<< max_.z << "]" << "\n";
 }
 
-Hit Box::intersect(Ray const& ray ,float& distance){ //funktioniert nicht?! Zumindest geht der Test nicht
+Hit Box::intersect(Ray const& ray ,float& distance){
 	Hit hit = Hit();
     float tx1 = (min_.x-ray.origin_.x)/ray.direction_.x;
     float tx2 = (max_.x-ray.origin_.x)/ray.direction_.x;
@@ -64,8 +64,8 @@ Hit Box::intersect(Ray const& ray ,float& distance){ //funktioniert nicht?! Zumi
     if(tfar>tnear){
         hit.hit = true;
         hit.hitray = ray;
-        hit.hitpos = glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.origin_;
-        hit.shape = std::shared_ptr<Box>(this);
+        hit.hitpos = glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.origin_;//das scheint nicht zu funktionieren
+        hit.shape = std::make_shared<Box>(min_, max_, get_material(), get_name());
     }
  
     tfar=std::min(tfar, tfarz);
@@ -75,7 +75,7 @@ Hit Box::intersect(Ray const& ray ,float& distance){ //funktioniert nicht?! Zumi
         hit.hit = true;
         hit.hitray = ray;
         hit.hitpos =  glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.origin_;
-        hit.shape = std::shared_ptr<Box>(this);
+        hit.shape = std::make_shared<Box>(min_, max_, get_material(), get_name());
     }
 
     return hit;
