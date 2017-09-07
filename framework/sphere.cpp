@@ -53,11 +53,10 @@ Hit Sphere::intersect(Ray const& ray, float& distance){
 		return hit;
 }
 
-Color Sphere::compute_light(Color const& ambient, Light const& light, Ray const& r){
+Color Sphere::compute_light(Color const& ambient, Light const& light, Ray const& r, float distance){
     Color result{};
-    float d = 50.0f;
-    Ray l{intersect(r, d).hitpos, glm::normalize(light.position_)};
-    Ray n{intersect(r, d).hitpos, intersect(r, d).hitpos + intersect(r, d).hitpos - center_}; // n muss in Objekten einzeln berechnet werden override
+    Ray l{intersect(r, distance).hitpos, light.position_};
+    Ray n{intersect(r, distance).hitpos, intersect(r, distance).hitpos + intersect(r, distance).hitpos - center_}; 
     Material mat = *get_material();
 
     float x = (2 * pow(n.direction_.x - n.origin_.x, 2.0f) -1) * light.position_.x +  
@@ -71,14 +70,22 @@ Color Sphere::compute_light(Color const& ambient, Light const& light, Ray const&
         (2 * pow(n.direction_.z - n.origin_.z, 2.0f) -1) * light.position_.z;
     
     Color inten = light.setIntensity();
+
+    auto vector_n = glm::normalize(n.direction_ - n.origin_);
+    auto vector_l = glm::normalize(l.direction_ - l.origin_);
     
-    float first_hold = (l.direction_.x - l.origin_.x) * (n.direction_.x - n.origin_.x) + 
-        (l.direction_.y - l.origin_.y) * (n.direction_.y - n.origin_.y) +
-        (l.direction_.z - l.origin_.z) * (n.direction_.z - n.origin_.z);
+    float first_hold = vector_l.x * vector_n.x + vector_l.y * vector_n.y + vector_l.z * vector_n.z;
 
-    float second_hold = (intersect(r, d).hitray.direction_.x - intersect(r, d).hitray.origin_.x) * x+ 
-        (intersect(r, d).hitray.direction_.y - intersect(r, d).hitray.origin_.y) * y + 
-        (intersect(r, d).hitray.direction_.z - intersect(r, d).hitray.origin_.z) * z;
+    auto vector_r = glm::normalize(glm::vec3{x,y,z});
+    auto vector_v = glm::normalize(intersect(r, distance).hitray.direction_ - intersect(r, distance).hitray.origin_);
 
-    result.r = ambient.r * mat.ka_.r + inten.r * (mat.kd_.r * first_hold) + mat.ks_.r * pow(second_hold, mat.m_);
+    float second_hold = vector_v.x * vector_r.x+ vector_v.y * vector_r.y + vector_v.z * vector_r.z;
+
+    result.r = ambient.r * mat.ka_.r + inten.r * (mat.kd_.r * first_hold + mat.ks_.r * pow(second_hold, mat.m_));
+    result.g = ambient.g * mat.ka_.g + inten.g * (mat.kd_.g * first_hold + mat.ks_.g * pow(second_hold, mat.m_));
+    result.b = ambient.b * mat.ka_.b + inten.b * (mat.kd_.b * first_hold + mat.ks_.b * pow(second_hold, mat.m_));
+
+    return result;
 }
+
+
