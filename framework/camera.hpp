@@ -3,11 +3,13 @@
 
 #include <iostream>
 #include <memory>
+#include <glm/vec3.hpp>
 
 struct Camera{
 
     std::string name_;
     float fovX_;
+    glm::vec3 pos_{0.0f};
 
     Camera();
     Camera(std::string const& nm, float opd);

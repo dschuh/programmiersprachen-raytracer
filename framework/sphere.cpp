@@ -58,6 +58,7 @@ Color Sphere::compute_light(Color const& ambient, Light const& light, Ray const&
     Ray l{intersect(r, distance).hitpos, light.position_};
     Ray n{intersect(r, distance).hitpos, intersect(r, distance).hitpos + intersect(r, distance).hitpos - center_}; 
     Material mat = *get_material();
+    int delta;
 
     float x = (2 * pow(n.direction_.x - n.origin_.x, 2.0f) -1) * light.position_.x +  
         (2 * (n.direction_.x - n.origin_.x) * (n.direction_.y - n.origin_.y)) * light.position_.y + 
@@ -79,11 +80,21 @@ Color Sphere::compute_light(Color const& ambient, Light const& light, Ray const&
     auto vector_r = glm::normalize(glm::vec3{x,y,z});
     auto vector_v = glm::normalize(intersect(r, distance).hitray.direction_ - intersect(r, distance).hitray.origin_);
 
+    if (intersect(Ray{glm::vec3{0.0f}, light.position_}, distance).hit == true){
+        delta = 0;
+    }
+    else{
+        delta = 1;
+    }
+
     float second_hold = vector_v.x * vector_r.x+ vector_v.y * vector_r.y + vector_v.z * vector_r.z;
 
-    result.r = ambient.r * mat.ka_.r + inten.r * (mat.kd_.r * first_hold + mat.ks_.r * pow(second_hold, mat.m_));
-    result.g = ambient.g * mat.ka_.g + inten.g * (mat.kd_.g * first_hold + mat.ks_.g * pow(second_hold, mat.m_));
-    result.b = ambient.b * mat.ka_.b + inten.b * (mat.kd_.b * first_hold + mat.ks_.b * pow(second_hold, mat.m_));
+    result.r = ambient.r * mat.ka_.r + inten.r * delta * (mat.kd_.r * first_hold + mat.ks_.r * 
+        pow(second_hold, mat.m_));
+    result.g = ambient.g * mat.ka_.g + inten.g * delta * (mat.kd_.g * first_hold + mat.ks_.g * 
+        pow(second_hold, mat.m_));
+    result.b = ambient.b * mat.ka_.b + inten.b * delta * (mat.kd_.b * first_hold + mat.ks_.b * 
+        pow(second_hold, mat.m_));
 
     return result;
 }
