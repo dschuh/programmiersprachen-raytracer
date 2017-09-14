@@ -11,6 +11,7 @@ struct Hit{
 
     bool hit_;
     float distance_;
+    Ray hitray_;
     glm::vec3 hitpos_;
     glm::vec3 normal_;
     std::shared_ptr<Shape> shape;

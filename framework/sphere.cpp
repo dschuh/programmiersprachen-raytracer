@@ -43,20 +43,21 @@ std::ostream& Sphere::print(std::ostream& ostream) const{
 	        << "Radius: " << radius_ <<"\n"<<"\n";
 }
 
-Hit Sphere::intersect(Ray const& ray, float& distance){
-        Hit hit = Hit();
-        auto direction = glm::normalize(ray.direction_);
-        hit.hit = glm::intersectRaySphere(ray.origin_, direction, center_, pow(radius_, 2), distance);
-        hit.hitray = ray;
-        hit.hitpos = ray.origin_ + direction * distance;
-        hit.shape = std::make_shared<Sphere>(center_, radius_, get_material(), get_name());
-		return hit;
+Hit Sphere::intersect(Ray const& ray) const{
+        Hit spherehit = Hit();
+        spherehit.hitray_ = ray;
+        spherehit.normal_ = glm::normalize(ray.direction_);
+        spherehit.hit_ = glm::intersectRaySphere(ray.origin_, spherehit.normal_, center_, pow(radius_, 2), spherehit.distance_);
+        spherehit.hitpos_ = ray.origin_ + spherehit.normal_ * spherehit.distance_;       
+        spherehit.distance_ = glm::distance(ray.origin_, spherehit.hitpos_);
+        spherehit.shape = std::make_shared<Sphere>(center_, radius_, get_material(), get_name());
+		return spherehit;
 }
 
 Color Sphere::compute_light(Color const& ambient, Light const& light, Ray const& r, float distance){
     Color result{};
-    Ray l{intersect(r, distance).hitpos, light.position_};
-    Ray n{intersect(r, distance).hitpos, intersect(r, distance).hitpos + intersect(r, distance).hitpos - center_}; 
+    Ray l{intersect(r/*, distance*/).hitpos_, light.position_};
+    Ray n{intersect(r/*, distance*/).hitpos_, intersect(r/*, distance*/).hitpos_ + intersect(r/*, distance*/).hitpos_ - center_}; 
     Material mat = *get_material();
     int delta;
 
@@ -78,9 +79,9 @@ Color Sphere::compute_light(Color const& ambient, Light const& light, Ray const&
     float first_hold = vector_l.x * vector_n.x + vector_l.y * vector_n.y + vector_l.z * vector_n.z;
 
     auto vector_r = glm::normalize(glm::vec3{x,y,z});
-    auto vector_v = glm::normalize(intersect(r, distance).hitray.direction_ - intersect(r, distance).hitray.origin_);
+    auto vector_v = glm::normalize(intersect(r/*, distance*/).hitray_.direction_ - intersect(r/*, distance*/).hitray_.origin_);
 
-    if (intersect(Ray{glm::vec3{0.0f}, light.position_}, distance).hit == true){
+    if (intersect(Ray{glm::vec3{0.0f}, light.position_}/*, distance*/).hit_ == true){
         delta = 0;
     }
     else{

@@ -136,27 +136,30 @@ TEST_CASE("Testing intestectSphere function", "[intersect]"){
 
   REQUIRE(sphere.intersect(ray, custom_distance) == true);
 }
-*/
+
 TEST_CASE("testing box intersect method", "[intersect]"){
-	Box box0{glm::vec3{3.0f}, glm::vec3{7.0f, 7.0f, -7.0f}, std::shared_ptr<Material>{"glass", {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, 0.0f}, "Kasten0"};
+
+  std::shared_ptr<Material> glass = std::make_shared<Material>("glass", {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, 0.0f);
+
+	Box box0{glm::vec3{3.0f}, glm::vec3{7.0f, 7.0f, -7.0f}, glass, "Kasten0"};
   Ray ray0{{0.0f, 0.0f, 0.0f}, {2.0f, 2.0f, -2.0f}};
   Hit hit0 = box0.intersect(ray0);
   REQUIRE(hit0.hit_==true);
   REQUIRE(hit0.distance_==4.0f);
-  REQUIRE(hit0.hitpos_==true);
-  REQUIRE(hit0.normal_==true);  
-  REQUIRE(hit0.shape==true);
+  REQUIRE(hit0.hitpos_==glm::vec3{0.0f});
+  REQUIRE(hit0.normal_==glm::vec3{0.0f});  
+  //REQUIRE(hit0.shape==std::shared_ptr<Box>);
 
-	Box box1{glm::vec3{3.0f}, glm::vec3{7.0f}, std::shared_ptr<Material>{"glass", {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, 0.0f}, "Kasten1"};
+	Box box1{glm::vec3{3.0f}, glm::vec3{7.0f}, glass, "Kasten1"};
   Ray ray1{{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 2.0f}};
   Hit hit1 = box1.intersect(ray1);
   REQUIRE(hit1.hit_==true);
   REQUIRE(hit1.distance_==4.0f);
-  REQUIRE(hit1.hitpos_==true);
-  REQUIRE(hit1.normal_==true);  
-  REQUIRE(hit1.shape==true);
+  REQUIRE(hit1.hitpos_==glm::vec3{0.0f});
+  REQUIRE(hit1.normal_==glm::vec3{0.0f});  
+  //REQUIRE(hit1.shape==std::shared_ptr<Box>);
 }
-
+*/
 /*TEST_CASE("sdfloader","[sdfloader]"){
     SDFloader sdf{};
     Scene scene = sdf.loadScene("/home/isabelle/Dokumente/programmiersprachen-raytracer/framework/material_scene.txt");

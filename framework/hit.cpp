@@ -2,8 +2,8 @@
 
 Hit::Hit():
     hit_{false},
-    distance_{0.0f}
-    hitpos{glm::vec3()},
-    normal{glm::vec3()},
+    distance_{INFINITY},
+    hitpos_{glm::vec3()},
+    normal_{glm::vec3()},
     shape{nullptr}{}
 

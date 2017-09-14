@@ -38,10 +38,10 @@ std::ostream& Box::print(std::ostream& ostream) const{
 		    << "Max: " << "["<< max_.x << ","<< max_.y << ","<< max_.z << "]" << "\n";
 }
 
-Hit Box::intersect(Ray const& ray){
+Hit Box::intersect(Ray const& ray) const{
     Hit hit = Hit();
     
-    //ray.direction = glm::normalize(ray.direction_)
+    //ray.direction_ = glm::normalize(ray.direction_)
 
     float tx1 = (min_.x-ray.origin_.x)/ray.direction_.x;
     float tx2 = (max_.x-ray.origin_.x)/ray.direction_.x;
@@ -65,11 +65,11 @@ Hit Box::intersect(Ray const& ray){
     float tnear=std::min(tnearx, tneary);
 
     if(tfar>tnear){
-        hit.hit = true;
+        hit.hit_ = true;
         hit.distance_ = sqrt(tnear*tnear*(ray.direction_.x*ray.direction_.x +
                                           ray.direction_.y*ray.direction_.y +
                                           ray.direction_.z*ray.direction_.z));
-        hit.hitpos = glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.origin_;//das scheint nicht zu funktionieren
+        hit.hitpos_ = glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.origin_;//das scheint nicht zu funktionieren
         hit.shape = std::make_shared<Box>(min_, max_, get_material(), get_name());
     }
  
@@ -77,11 +77,11 @@ Hit Box::intersect(Ray const& ray){
     tnear=std::max(tnear, tnearz);
 
     if((tfar>0) || (tfar>tnear)){
-        hit.hit = true;
+        hit.hit_ = true;
         hit.distance_ = sqrt(tnear*tnear*(ray.direction_.x*ray.direction_.x +
                                           ray.direction_.y*ray.direction_.y +
                                           ray.direction_.z*ray.direction_.z));
-        hit.hitpos =  glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.origin_;
+        hit.hitpos_ =  glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.origin_;
         hit.shape = std::make_shared<Box>(min_, max_, get_material(), get_name());
     }
 

@@ -27,7 +27,7 @@ public:
 	virtual float area() const =0;
 	virtual float volume() const =0;
 	virtual std::ostream& print(std::ostream& os) const=0;
-	virtual Hit intersect (Ray const& ray, float& t)=0;
+	virtual Hit intersect (Ray const& ray) const=0;
 
 
 private:
