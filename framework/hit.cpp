@@ -1,8 +1,9 @@
 #include "hit.hpp"
 
 Hit::Hit():
-    hit{false},
-    hitray{Ray()},
+    hit_{false},
+    distance_{0.0f}
     hitpos{glm::vec3()},
+    normal{glm::vec3()},
     shape{nullptr}{}
 

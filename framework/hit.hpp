@@ -9,10 +9,10 @@ class Shape;
 
 struct Hit{
 
-    bool hit;
-    float distance;
-    glm::vec3 hitpos;
-    glm::vec3 normal;
+    bool hit_;
+    float distance_;
+    glm::vec3 hitpos_;
+    glm::vec3 normal_;
     std::shared_ptr<Shape> shape;
 
     Hit();

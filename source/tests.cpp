@@ -136,22 +136,32 @@ TEST_CASE("Testing intestectSphere function", "[intersect]"){
 
   REQUIRE(sphere.intersect(ray, custom_distance) == true);
 }
-
+*/
 TEST_CASE("testing box intersect method", "[intersect]"){
 	Box box0{glm::vec3{3.0f}, glm::vec3{7.0f, 7.0f, -7.0f}, std::shared_ptr<Material>{"glass", {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, 0.0f}, "Kasten0"};
-	Ray ray0{{0.0f, 0.0f, 0.0f}, {2.0f, 2.0f, -2.0f}};
-	float distance = 4.0f;
-	REQUIRE(box0.intersect(ray0, distance)==true);
+  Ray ray0{{0.0f, 0.0f, 0.0f}, {2.0f, 2.0f, -2.0f}};
+  Hit hit0 = box0.intersect(ray0);
+  REQUIRE(hit0.hit_==true);
+  REQUIRE(hit0.distance_==4.0f);
+  REQUIRE(hit0.hitpos_==true);
+  REQUIRE(hit0.normal_==true);  
+  REQUIRE(hit0.shape==true);
+
 	Box box1{glm::vec3{3.0f}, glm::vec3{7.0f}, std::shared_ptr<Material>{"glass", {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, 0.0f}, "Kasten1"};
-	Ray ray1{{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 2.0f}};
-	REQUIRE(box1.intersect(ray1, distance)==false);
-}*/
+  Ray ray1{{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 2.0f}};
+  Hit hit1 = box1.intersect(ray1);
+  REQUIRE(hit1.hit_==true);
+  REQUIRE(hit1.distance_==4.0f);
+  REQUIRE(hit1.hitpos_==true);
+  REQUIRE(hit1.normal_==true);  
+  REQUIRE(hit1.shape==true);
+}
 
 /*TEST_CASE("sdfloader","[sdfloader]"){
     SDFloader sdf{};
     Scene scene = sdf.loadScene("/home/isabelle/Dokumente/programmiersprachen-raytracer/framework/material_scene.txt");
     std::cout << *scene.materials.find("red")->second << *scene.materials.find("blue")->second << *scene.lights[0] << *scene.camera<< *scene.shapes.find("bsphere")->second << scene.ambiente.r;
-}*/
+}
 
 TEST_CASE("intersect","[intersect]"){
     SDFloader sdf{};
@@ -162,7 +172,7 @@ TEST_CASE("intersect","[intersect]"){
     Ray ray1{{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 2.0f}};
     float distance = 2000.0f;
     std::cout << sphere.compute_light(scene.ambiente, *scene.lights[0], ray1, distance).g;
-}
+}*/
 
 int main(int argc, char *argv[])
 {
