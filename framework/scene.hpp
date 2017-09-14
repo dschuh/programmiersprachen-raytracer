@@ -1,8 +1,8 @@
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
-#include "box.hpp"
-#include "sphere.hpp"
+#include "shape.hpp"
+#include "material.hpp"
 #include "light.hpp"
 #include "camera.hpp"
 #include "composite.hpp"
@@ -19,8 +19,8 @@ struct Scene{
     Color ambiente;
     std::map<std::string, std::shared_ptr<Material>> materials;
     std::shared_ptr<Camera> camera;
-    std::map<std::string, std::shared_ptr<Shape>> shapes;
-    std::map<std::string, std::vector<std::shared_ptr<Shape>>> composite;
+    std::shared_ptr<Composite> shapes;
+    
 };
 
 #endif

@@ -2,6 +2,8 @@
 #define HIT_HPP
 
 #include "ray.hpp"
+#include "shape.hpp"
+#include "material.hpp"
 #include <glm/glm.hpp>
 #include <memory>
 

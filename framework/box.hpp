@@ -19,6 +19,7 @@ public:
 	float volume() const override;
 	
 	Hit intersect(Ray const& ray) const override;
+	Color compute_light(Color const& ambient, Light const& light, Ray const& r, float distance)const override;
 
 	std::ostream& print(std::ostream& ostream) const override;
 

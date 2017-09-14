@@ -34,12 +34,26 @@ void Renderer::render()
   for (unsigned y = 0; y < height_; ++y) {
     for (unsigned x = 0; x < width_; ++x) {
       Pixel p(x,y);
-      if ( ((x/checkersize)%2) != ((y/checkersize)%2)) {
-        p.color = Color(0.0, 1.0, float(x)/height_);
-      } else {
-        p.color = Color(1.0, 0.0, float(y)/width_);
-      }
+      //Create ray
+      Ray shootingstar= scene_.camera->makeRay(x, y, height_, width_);
+      //Find closest hit
+      Hit nearest = scene_.shapes->closest_hit(shootingstar);
 
+
+
+
+      ///////////////////////////////////////
+      //Distance muss noch entfernt werden, ohne compiliert aber gerade nicht
+      float distance = INFINITY;
+      //////////////////////////////////////
+      
+      if(nearest.hit_==true){
+        for(auto const& i : scene_.lights){
+        p.color += nearest.shape->compute_light(scene_.ambiente, *i, shootingstar, distance);
+        }
+      }
+      else p.color=scene_.ambiente;
+      
       write(p);
     }
   }

@@ -8,6 +8,7 @@ Scene SDFloader::loadScene (std::string const& path){
     std::string line;
     Sphere spr;
     Box bx;
+    std::map<std::string, std::shared_ptr<Shape>> pointed_shapes;
 
     while(std::getline(file,line)){
         std::stringstream ss;
@@ -81,7 +82,7 @@ Scene SDFloader::loadScene (std::string const& path){
                         material = scene.materials.find(keyword)->second;
                         ss >> name;
                         std::shared_ptr<Shape> sphere = std::make_shared<Sphere>(center,radius,material,name);
-                        scene.shapes[name] = sphere;
+                        pointed_shapes[name] = sphere;
                     }
                     if (keyword == "box"){
 
@@ -100,7 +101,7 @@ Scene SDFloader::loadScene (std::string const& path){
                         material = scene.materials.find(keyword)->second;
                         ss >> name;
                         std::shared_ptr<Shape> box = std::make_shared<Box>(min, max, material, name);
-                        scene.shapes[name] = box;
+                        pointed_shapes[name] = box;
                     }
                     if (keyword == "composite"){
                         std::string name;
@@ -109,11 +110,10 @@ Scene SDFloader::loadScene (std::string const& path){
                         ss >> name;
                         while(ss){
                             ss >> keyword;
-                            std::shared_ptr<Shape> object = scene.shapes.find(keyword)->second;
+                            std::shared_ptr<Shape> object = pointed_shapes.find(keyword)->second;
                             layer.push_back(object);
                         }
-                        
-                        scene.composite[name] = layer;
+                        //scene.shapes = std::make_shared(layer);
                     } 
                 }
             }
