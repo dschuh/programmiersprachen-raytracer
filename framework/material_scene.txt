@@ -4,4 +4,5 @@ define light sun 1000 700 0 0.2 0.2 0.2 100
 define camera eye 45.0
 define shape sphere 0 0 -100 50 blue bsphere
 define shape box -100 -80 -200 100 80 -100 red rbottom
+define shape composite spaghetti bsphere rbottom
 ambient 0.1 0.1 0.1

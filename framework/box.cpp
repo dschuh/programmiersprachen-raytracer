@@ -88,6 +88,7 @@ Hit Box::intersect(Ray const& ray) const{
     return hit;
 }
 
+
 Color Box::compute_light(Color const& ambient, Light const& light, Ray const& r){
     Color result{};
     Ray l{intersect(r).hitpos_, light.position_};
@@ -123,9 +124,11 @@ Color Box::compute_light(Color const& ambient, Light const& light, Ray const& r)
     float first_hold = vector_l.x * vector_n.x + vector_l.y * vector_n.y + vector_l.z * vector_n.z;
 
     auto vector_r = glm::normalize(glm::vec3{x,y,z});
+
     auto vector_v = glm::normalize(intersect(r).hitray_.direction_ - intersect(r).hitray_.origin_);
 
     if (intersect(Ray{glm::vec3{0.0f}, light.position_}).hit_ == true){
+
         delta = 0;
     }
     else{
@@ -142,4 +145,6 @@ Color Box::compute_light(Color const& ambient, Light const& light, Ray const& r)
         pow(second_hold, mat.m_));
 
     return result;
+
 }
+

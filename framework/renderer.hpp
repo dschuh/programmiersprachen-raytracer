@@ -14,6 +14,8 @@
 #include "color.hpp"
 #include "pixel.hpp"
 #include "ppmwriter.hpp"
+//#include "hit.hpp"
+//#include "shape.hpp"
 #include <string>
 #include <glm/glm.hpp>
 
@@ -27,7 +29,7 @@ public:
   void write(Pixel const& p);
 
   //Methoden zur Farbberechnung (Licht)
-
+  //Sind in box und sphere, warum auch immer :D
 
 
   inline std::vector<Color> const& colorbuffer() const

@@ -1,5 +1,6 @@
 #include <renderer.hpp>
 #include <window.hpp>
+#include "../framework/sdfloader.hpp"
 
 #include <GLFW/glfw3.h>
 #include <thread>
@@ -10,9 +11,17 @@ int main(int argc, char* argv[])
 {
   unsigned const width = 800;
   unsigned const height = 600;
-  std::string const filename = "./checkerboard.ppm";
+  std::string file;
+  std::string filename;
 
-  Renderer app{width, height, filename};
+  std::cout << "Dateipfad eingeben \n";
+  std::cin >> file;
+  std::cout << "Bitte gewuenschten Bildnamen eingeben \n";
+  std::cin >> filename;
+
+  SDFloader loader;  
+  Scene to_be_rendered = loader.loadScene(file);
+  Renderer app(to_be_rendered, width, height, filename);
 
   std::thread thr([&app]() { app.render(); });
 

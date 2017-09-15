@@ -54,7 +54,9 @@ Hit Sphere::intersect(Ray const& ray) const{
 		return spherehit;
 }
 
+
 Color Sphere::compute_light(Color const& ambient, Light const& light, Ray const& r){
+
     Color result{};
     Ray l{intersect(r).hitpos_, light.position_};
     Ray n{intersect(r).hitpos_, intersect(r).hitpos_ + intersect(r).hitpos_ - center_}; 
