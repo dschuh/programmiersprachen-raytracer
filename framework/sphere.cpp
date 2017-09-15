@@ -54,10 +54,10 @@ Hit Sphere::intersect(Ray const& ray) const{
 		return spherehit;
 }
 
-Color Sphere::compute_light(Color const& ambient, Light const& light, Ray const& r, float distance){
+Color Sphere::compute_light(Color const& ambient, Light const& light, Ray const& r){
     Color result{};
-    Ray l{intersect(r/*, distance*/).hitpos_, light.position_};
-    Ray n{intersect(r/*, distance*/).hitpos_, intersect(r/*, distance*/).hitpos_ + intersect(r/*, distance*/).hitpos_ - center_}; 
+    Ray l{intersect(r).hitpos_, light.position_};
+    Ray n{intersect(r).hitpos_, intersect(r).hitpos_ + intersect(r).hitpos_ - center_}; 
     Material mat = *get_material();
     int delta;
 
@@ -79,9 +79,9 @@ Color Sphere::compute_light(Color const& ambient, Light const& light, Ray const&
     float first_hold = vector_l.x * vector_n.x + vector_l.y * vector_n.y + vector_l.z * vector_n.z;
 
     auto vector_r = glm::normalize(glm::vec3{x,y,z});
-    auto vector_v = glm::normalize(intersect(r/*, distance*/).hitray_.direction_ - intersect(r/*, distance*/).hitray_.origin_);
+    auto vector_v = glm::normalize(intersect(r).hitray_.direction_ - intersect(r).hitray_.origin_);
 
-    if (intersect(Ray{glm::vec3{0.0f}, light.position_}/*, distance*/).hit_ == true){
+    if (intersect(Ray{glm::vec3{0.0f}, light.position_}).hit_ == true){
         delta = 0;
     }
     else{
