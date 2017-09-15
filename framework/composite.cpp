@@ -23,7 +23,31 @@ void Composite::set_name(std::string const nm)
         name=nm;
     }
 
-Hit Composite::closest_hit(Ray const& ray){
+float Composite::area() const{
+    float area = 0.0f;
+    for(auto const& shape : composite_){
+        area = shape -> area();
+    }
+    return area;
+}
+
+float Composite::volume() const{
+    float volume = 0.0f;
+    for(auto const& shape : composite_){
+        volume = shape -> volume();
+    }
+    return volume;
+}
+
+std::ostream& Composite::print(std::ostream& ostream) const{
+    for(auto const& shape : composite_){
+        shape ->print(ostream);
+        ostream << "\n";
+    }
+return ostream;
+}
+
+Hit Composite::intersect(Ray const& ray) const{
     Hit hit_temp;
     Hit hit_close;
     for(auto const& i : composite_){
@@ -34,5 +58,8 @@ Hit Composite::closest_hit(Ray const& ray){
       }
     }
     return hit_close;
+}
 
+Color compute_light(Color const& ambient, Light const& light, Ray const& r){
+    return Color{0.0f, 0.0f, 0.0f};
 }
