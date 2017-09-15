@@ -113,7 +113,8 @@ Scene SDFloader::loadScene (std::string const& path){
                             std::shared_ptr<Shape> object = pointed_shapes.find(keyword)->second;
                             layer.push_back(object);
                         }
-                        //scene.shapes = std::make_shared(layer);
+                        std::shared_ptr<Composite> holdComposite = std::make_shared<Composite>(name,layer);
+                        scene.shapes = holdComposite;
                     } 
                 }
             }

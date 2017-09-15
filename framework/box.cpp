@@ -66,9 +66,9 @@ Hit Box::intersect(Ray const& ray) const{
 
     if(tfar>tnear){
         hit.hit_ = true;
-        hit.distance_ = sqrt(tnear*tnear*(ray.direction_.x*ray.direction_.x +
+        /*hit.distance_ = sqrt(tnear*tnear*(ray.direction_.x*ray.direction_.x +
                                           ray.direction_.y*ray.direction_.y +
-                                          ray.direction_.z*ray.direction_.z));
+                                          ray.direction_.z*ray.direction_.z));*/
         hit.hitpos_ = glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.origin_;//das scheint nicht zu funktionieren
         hit.shape = std::make_shared<Box>(min_, max_, get_material(), get_name());
     }
@@ -83,6 +83,7 @@ Hit Box::intersect(Ray const& ray) const{
                                           ray.direction_.z*ray.direction_.z));
         hit.hitpos_ =  glm::vec3{tnear*ray.direction_.x, tnear*ray.direction_.y, tnear*ray.direction_.z}+ray.origin_;
         hit.shape = std::make_shared<Box>(min_, max_, get_material(), get_name());
+        hit.distance_ = (min_.x - ray.origin_.x)/ray.direction_.x;
     }
 
     return hit;

@@ -5,9 +5,9 @@ Composite::Composite():
     composite_()
     {}
 
-Composite::Composite(std::string const& name):
+Composite::Composite(std::string const& name, std::vector<std::shared_ptr<Shape>> comp):
     name(name),
-    composite_()
+    composite_(comp)
     {}
 
  Composite::~Composite()
@@ -60,6 +60,6 @@ Hit Composite::intersect(Ray const& ray) const{
     return hit_close;
 }
 
-Color compute_light(Color const& ambient, Light const& light, Ray const& r){
+Color Composite::compute_light(Color const& ambient, Light const& light, Ray const& r) const{
     return Color{0.0f, 0.0f, 0.0f};
 }

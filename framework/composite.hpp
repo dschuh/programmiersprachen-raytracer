@@ -7,7 +7,7 @@ class Composite : public Shape
 {
 public:
     Composite();
-    Composite(std::string const& name);
+    Composite(std::string const& name, std::vector<std::shared_ptr<Shape>> comp);
     ~Composite();
 
     void add_shape(std::shared_ptr<Shape> const& shape);

@@ -173,7 +173,8 @@ TEST_CASE("intersect","[intersect]"){
     Box box0{glm::vec3{3.0f}, glm::vec3{7.0f, 7.0f, -7.0f}, scene.materials.find("blue")->second, "Kasten0"};
     Sphere sphere{{0.0f, 0.0f, 4.0f}, 1.0f, scene.materials.find("red")->second, "Sphere"};
     Ray ray1{{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 2.0f}};
-    std::cout << box0.compute_light(scene.ambiente, *scene.lights[0], ray1).g;
+    std::cout << *scene.shapes;
+    //std::cout << box0.intersect(ray1).distance_; //box0.compute_light(scene.ambiente, *scene.lights[0], ray1).g;
 }
 
 int main(int argc, char *argv[])
