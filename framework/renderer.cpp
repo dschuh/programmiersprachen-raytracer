@@ -38,18 +38,10 @@ void Renderer::render()
       Ray shootingstar= scene_.camera->makeRay(x, y, height_, width_);
       //Find closest hit
       Hit nearest = scene_.shapes->closest_hit(shootingstar);
-
-
-
-
-      ///////////////////////////////////////
-      //Distance muss noch entfernt werden, ohne compiliert aber gerade nicht
-      float distance = INFINITY;
-      //////////////////////////////////////
       
       if(nearest.hit_==true){
         for(auto const& i : scene_.lights){
-        p.color += nearest.shape->compute_light(scene_.ambiente, *i, shootingstar, distance);
+        p.color += nearest.shape->compute_light(scene_.ambiente, *i, shootingstar);
         }
       }
       else p.color=scene_.ambiente;
