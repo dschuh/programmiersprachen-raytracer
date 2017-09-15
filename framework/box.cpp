@@ -89,7 +89,7 @@ Hit Box::intersect(Ray const& ray) const{
 }
 
 
-Color Box::compute_light(Color const& ambient, Light const& light, Ray const& r){
+Color Box::compute_light(Color const& ambient, Light const& light, Ray const& r) const{
     Color result{};
     Ray l{intersect(r).hitpos_, light.position_};
     Ray n; 

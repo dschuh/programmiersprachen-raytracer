@@ -28,7 +28,7 @@ public:
 	virtual float volume() const =0;
 	virtual std::ostream& print(std::ostream& os) const=0;
 	virtual Hit intersect (Ray const& ray) const=0;
-	virtual Color compute_light(Color const& ambient, Light const& light, Ray const& r, float distance)const =0;
+	virtual Color compute_light(Color const& ambient, Light const& light, Ray const& r)const =0;
 	
 
 

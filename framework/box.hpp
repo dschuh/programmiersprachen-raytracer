@@ -20,7 +20,7 @@ public:
 	
 	Hit intersect(Ray const& ray) const override;
 
-    Color compute_light(Color const& ambient, Light const& light, Ray const& r);
+    Color compute_light(Color const& ambient, Light const& light, Ray const& r) const override;
 
 	std::ostream& print(std::ostream& ostream) const override;
 
