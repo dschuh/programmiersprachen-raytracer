@@ -9,6 +9,15 @@
 
 #include "renderer.hpp"
 
+Renderer::Renderer(Scene const& scene)
+  : scene_(scene)
+  , width_(scene.w)
+  , height_(scene.h)
+  , colorbuffer_(scene.w*scene.h, Color(0.0, 0.0, 0.0))
+  , filename_(scene.pic_name)
+  , ppm_(width_, height_)
+{}
+
 Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
   : width_(w)
   , height_(h)
@@ -36,6 +45,14 @@ void Renderer::render()
       Pixel p(x,y);
       //Create ray
       Ray shootingstar= scene_.camera->makeRay(x, y, height_, width_);
+
+      //////////////////////////////////////////////////////////////////
+      // Hier kommt theoretisch
+      // transformationsgedingse
+      // da fehlt aber noch ne methode
+      // Ray transformRay ( glm :: mat4 const & mat , Ray const & ray );
+      //////////////////////////////////////////////////////////////////
+
       //Find closest hit
       Hit nearest = scene_.shapes->intersect(shootingstar);
       

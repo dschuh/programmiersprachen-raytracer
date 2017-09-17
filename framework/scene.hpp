@@ -20,6 +20,9 @@ struct Scene{
     std::map<std::string, std::shared_ptr<Material>> materials;
     std::shared_ptr<Camera> camera;
     std::shared_ptr<Composite> shapes;
+    std::string pic_name;
+    unsigned w;
+    unsigned h;
     
 };
 

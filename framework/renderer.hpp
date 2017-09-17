@@ -22,6 +22,7 @@
 class Renderer
 {
 public:
+  Renderer(Scene const& scene);
   Renderer(unsigned w, unsigned h, std::string const& file);
   Renderer(Scene const& scene, unsigned w, unsigned h, std::string const& file);
 

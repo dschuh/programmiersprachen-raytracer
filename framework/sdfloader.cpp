@@ -134,7 +134,81 @@ Scene SDFloader::loadScene (std::string const& path){
                 ss >> scene.ambiente.r;
                 ss >> scene.ambiente.g;
                 ss >> scene.ambiente.b;
-            }          
+            }
+            if( keyword == "transform"){
+
+                float winkel;
+                glm::vec3 input_vector;
+                std::string func;
+                std::string objectname;
+                ss >> objectname;
+
+                if(objectname == "camera"){
+                    //////cam_name unused due to having only one camera per scene
+                    std::string cam_name;
+                    ss >> cam_name;
+                    ss >> func;
+                    if(func == "translate"){
+                        ss >> input_vector.x;
+                        ss >> input_vector.y;
+                        ss >> input_vector.z;
+                        scene.camera->transform(input_vector);
+                    }
+                    else if(func == "rotate"){
+                        ss >> winkel;
+                        ss >> input_vector.x;
+                        ss >> input_vector.y;
+                        ss >> input_vector.z;
+                        scene.camera->rotate(winkel, input_vector);
+                    }
+                }
+                else{
+                    auto shape_ptr = pointed_shapes.find(objectname);
+					if(shape_ptr != pointed_shapes.end())
+					{
+						ss >> func;
+
+						if (func == "scale")
+						{
+							ss >> input_vector.x;
+							ss >> input_vector.y;
+							ss >> input_vector.z;
+
+							shape_ptr->second->scale(input_vector);
+						}
+						else if (func == "rotate")
+						{
+							ss >> winkel;
+
+							ss >> input_vector.x;
+							ss >> input_vector.y;
+							ss >> input_vector.z;
+
+							shape_ptr->second->rotate(winkel, input_vector);
+						}
+						else if (func == "translate")
+						{
+							ss >> input_vector.x;
+							ss >> input_vector.y;
+							ss >> input_vector.z;
+
+							shape_ptr->second->transform(input_vector);
+                        }
+                    }
+                }
+            if( keyword == "render"){
+                std::string cam_name;
+                ss >> cam_name;
+                std::string pic_name;
+                ss >> pic_name;
+                unsigned w = 0; unsigned h = 0;
+                ss >> w;
+                ss >> h;
+                scene.pic_name = pic_name;
+                scene.w = w;
+                scene.h = h;
+            }    
+        }
     }
     return scene;
 }
