@@ -59,11 +59,23 @@ Scene SDFloader::loadScene (std::string const& path){
                 if (keyword == "camera"){
                     std::string name;
                     float fov_x;
+                    glm::vec3 pos;
+                    glm::vec3 dir;
+                    glm::vec3 up;
                     
                     ss >> name;
                     ss >> fov_x;  
-  
-                    std::shared_ptr<Camera> camera = std::make_shared<Camera>(name,fov_x);
+                    ss >> pos.x;
+                    ss >> pos.y;
+                    ss >> pos.z;
+                    ss >> dir.x;
+                    ss >> dir.y;
+                    ss >> dir.z;
+                    ss >> up.x;
+                    ss >> up.y;
+                    ss >> up.z;
+
+                    std::shared_ptr<Camera> camera = std::make_shared<Camera>(name,fov_x, pos, dir, up);
                     scene.camera = camera;
                 }
                 if (keyword == "shape"){
