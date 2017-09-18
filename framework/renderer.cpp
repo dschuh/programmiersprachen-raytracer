@@ -64,13 +64,15 @@ void Renderer::render()
             Color intensity = light.setIntensity();
             glm::vec3 n = glm::normalize(nearest.normal_);
 
-            Ray toLight{nearest.hitpos_ + glm::normalize(light.position_ + nearest.hitpos_), glm::normalize(light.position_+ nearest.hitpos_)};
+            Ray toLight{nearest.hitpos_, glm::normalize(light.position_- nearest.hitpos_)};
 
-            glm::vec3 l = toLight.direction_;
+            toLight.origin_ += n * 0.001f;
+
+            glm::vec3 l = glm::normalize(toLight.direction_);
 
             float ln = std::max(glm::dot(l, n), 0.0f);
 
-            glm::vec3 r = glm::normalize(glm::reflect(l, n));
+            glm::vec3 r = glm::normalize(glm::reflect(-l, n));
 
             glm::vec3 v = glm::normalize(glm::vec3{- shootingstar.direction_.x, -shootingstar.direction_.y, - shootingstar.direction_.z});
 
