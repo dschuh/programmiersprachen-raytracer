@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
   std::string file;
   std::string filename;
 
-  std::cout << "Dateipfad eingeben \n";
+  std::cout << "Bitte Dateipfad eingeben \n";
   std::cin >> file;
   std::cout << "Bitte gewuenschten Bildnamen eingeben \n";
   std::cin >> filename;
@@ -23,7 +23,9 @@ int main(int argc, char* argv[])
   Scene to_be_rendered = loader.loadScene(file);
   Renderer app(to_be_rendered, width, height, filename);
 
-  std::thread thr([&app]() { app.render(); });
+  //std::thread thr([&app]() { 
+    app.render(); 
+  //});
 
   Window win{glm::ivec2{width,height}};
 
@@ -34,7 +36,7 @@ int main(int argc, char* argv[])
     win.show(app.colorbuffer());
   }
 
-  thr.join();
+  //thr.join();
 
   return 0;
 }

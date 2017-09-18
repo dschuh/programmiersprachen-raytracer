@@ -59,11 +59,23 @@ Scene SDFloader::loadScene (std::string const& path){
                 if (keyword == "camera"){
                     std::string name;
                     float fov_x;
+                    glm::vec3 pos;
+                    glm::vec3 dir;
+                    glm::vec3 up;
                     
                     ss >> name;
                     ss >> fov_x;  
-  
-                    std::shared_ptr<Camera> camera = std::make_shared<Camera>(name,fov_x);
+                    ss >> pos.x;
+                    ss >> pos.y;
+                    ss >> pos.z;
+                    ss >> dir.x;
+                    ss >> dir.y;
+                    ss >> dir.z;
+                    ss >> up.x;
+                    ss >> up.y;
+                    ss >> up.z;
+
+                    std::shared_ptr<Camera> camera = std::make_shared<Camera>(name,fov_x, pos, dir, up);
                     scene.camera = camera;
                 }
                 if (keyword == "shape"){
@@ -122,7 +134,81 @@ Scene SDFloader::loadScene (std::string const& path){
                 ss >> scene.ambiente.r;
                 ss >> scene.ambiente.g;
                 ss >> scene.ambiente.b;
-            }          
+            }
+            if( keyword == "transform"){
+
+                float winkel;
+                glm::vec3 input_vector;
+                std::string func;
+                std::string objectname;
+                ss >> objectname;
+
+                if(objectname == "camera"){
+                    //////cam_name unused due to having only one camera per scene
+                    std::string cam_name;
+                    ss >> cam_name;
+                    ss >> func;
+                    if(func == "translate"){
+                        ss >> input_vector.x;
+                        ss >> input_vector.y;
+                        ss >> input_vector.z;
+                        scene.camera->transform(input_vector);
+                    }
+                    else if(func == "rotate"){
+                        ss >> winkel;
+                        ss >> input_vector.x;
+                        ss >> input_vector.y;
+                        ss >> input_vector.z;
+                        scene.camera->rotate(winkel, input_vector);
+                    }
+                }
+                else{
+                    auto shape_ptr = pointed_shapes.find(objectname);
+					if(shape_ptr != pointed_shapes.end())
+					{
+						ss >> func;
+
+						if (func == "scale")
+						{
+							ss >> input_vector.x;
+							ss >> input_vector.y;
+							ss >> input_vector.z;
+
+							shape_ptr->second->scale(input_vector);
+						}
+						else if (func == "rotate")
+						{
+							ss >> winkel;
+
+							ss >> input_vector.x;
+							ss >> input_vector.y;
+							ss >> input_vector.z;
+
+							shape_ptr->second->rotate(winkel, input_vector);
+						}
+						else if (func == "translate")
+						{
+							ss >> input_vector.x;
+							ss >> input_vector.y;
+							ss >> input_vector.z;
+
+							shape_ptr->second->transform(input_vector);
+                        }
+                    }
+                }
+            if( keyword == "render"){
+                std::string cam_name;
+                ss >> cam_name;
+                std::string pic_name;
+                ss >> pic_name;
+                unsigned w = 0; unsigned h = 0;
+                ss >> w;
+                ss >> h;
+                scene.pic_name = pic_name;
+                scene.w = w;
+                scene.h = h;
+            }    
+        }
     }
     return scene;
 }
