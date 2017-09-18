@@ -18,8 +18,6 @@ public:
 	float volume() const override;
 	std::ostream& print(std::ostream& os) const override;
     Hit intersect (Ray const& ray) const override;
-    
-	Color compute_light(Color const& ambient, Light const& light, Ray const& r)const override;
 
 private:
     std::string name;

@@ -172,12 +172,13 @@ TEST_CASE("intersect","[intersect]"){
     //std::shared_ptr<Material> glass = std::make_shared<Material>("glass", {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, {255.0f, 255.0f, 255.0f}, 0.0f);
     Box box0{glm::vec3{3.0f}, glm::vec3{7.0f, 7.0f, -7.0f}, scene.materials.find("blue")->second, "Kasten0"};
     Sphere sphere{{0.0f, 0.0f, 4.0f}, 1.0f, scene.materials.find("red")->second, "Sphere"};
-    Ray ray1{{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 2.0f}};
-    std::cout << *scene.shapes;
+    Ray ray1{{2.0f, 2.0f, 2.0f}, {7.0f, 7.0f, -7.0f}};
+    std::cout << box0.intersect(ray1).hitpos_.x;
     //std::cout << box0.intersect(ray1).distance_; //box0.compute_light(scene.ambiente, *scene.lights[0], ray1).g;
 }
 
 int main(int argc, char *argv[])
 {
+
   return Catch::Session().run(argc, argv);
 }

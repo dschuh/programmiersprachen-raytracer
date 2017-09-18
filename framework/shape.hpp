@@ -22,13 +22,11 @@ public:
 
 	std::shared_ptr<Material> const& get_material() const;
 	std::string const& get_name() const; //Nutzt man const& nicht nur bei der Übergabe von zusammen gesetzten Datentypen?
-    //virtual Color compute_light(); //Const correctness einfügen
 
 	virtual float area() const =0;
 	virtual float volume() const =0;
 	virtual std::ostream& print(std::ostream& os) const=0;
 	virtual Hit intersect (Ray const& ray) const=0;
-	virtual Color compute_light(Color const& ambient, Light const& light, Ray const& r)const =0;
 	
 
 

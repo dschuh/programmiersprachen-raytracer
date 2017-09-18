@@ -60,6 +60,3 @@ Hit Composite::intersect(Ray const& ray) const{
     return hit_close;
 }
 
-Color Composite::compute_light(Color const& ambient, Light const& light, Ray const& r) const{
-    return Color{0.0f, 0.0f, 0.0f};
-}

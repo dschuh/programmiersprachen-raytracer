@@ -41,7 +41,32 @@ void Renderer::render()
       
       if(nearest.hit_==true){
         for(auto const& i : scene_.lights){
-        p.color += nearest.shape->compute_light(scene_.ambiente, *i, shootingstar);
+            std::shared_ptr<Material> mat = nearest.shape -> get_material();
+            int delta;
+            Light light = *i;
+            Color intensity = light.setIntensity();
+            glm::vec3 n = glm::normalize(nearest.normal_);
+
+            Ray toLight{nearest.hitpos_ + glm::normalize(light.position_ + nearest.hitpos_), glm::normalize(light.position_+ nearest.hitpos_)};
+
+            glm::vec3 l = toLight.direction_;
+
+            float ln = std::max(glm::dot(l, n), 0.0f);
+
+            glm::vec3 r = glm::normalize(glm::reflect(l, n));
+
+            glm::vec3 v = glm::normalize(glm::vec3{- shootingstar.direction_.x, -shootingstar.direction_.y, - shootingstar.direction_.z});
+
+            float rv = std::max(glm::dot(r, v), 0.0f);
+
+            if(scene_.shapes -> intersect(toLight).hit_){
+                delta = 0;
+            }
+            else{
+                delta = 1;
+            }
+
+            p.color += scene_.ambiente * mat -> ka_ + intensity * delta * (mat -> kd_ * ln + mat -> ks_ * pow(rv, mat -> m_));
         }
       }
       else p.color=scene_.ambiente;
